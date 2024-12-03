@@ -1,0 +1,21 @@
+root@mijnui-dev:~/mijn-ui-react# docker build --target build -t mijn-ui-react:v1.0.2 .
+[+] Building 361.1s (13/13) FINISHED                                                                                                                              docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                        0.0s
+ => => transferring dockerfile: 1.07kB                                                                                                                                      0.0s
+ => [internal] load metadata for docker.io/library/node:18-alpine                                                                                                           1.7s
+ => [internal] load .dockerignore                                                                                                                                           0.0s
+ => => transferring context: 54B                                                                                                                                            0.0s
+ => [base 1/4] FROM docker.io/library/node:18-alpine@sha256:7e43a2d633d91e8655a6c0f45d2ed987aa4930f0792f6d9dd3bffc7496e44882                                                0.0s
+ => [internal] load build context                                                                                                                                           0.1s
+ => => transferring context: 34.89kB                                                                                                                                        0.0s
+ => CACHED [base 2/4] RUN apk update                                                                                                                                        0.0s
+ => CACHED [base 3/4] RUN apk add --no-cache libc6-compat                                                                                                                   0.0s
+ => CACHED [base 4/4] RUN yarn global add pnpm@9.12.3 turbo@2.3.0                                                                                                           0.0s
+ => CACHED [build 1/4] WORKDIR /app                                                                                                                                         0.0s
+ => [build 2/4] COPY . .                                                                                                                                                    0.4s
+ => [build 3/4] RUN pnpm install --no-frozen-lockfile                                                                                                                      26.8s
+ => [build 4/4] RUN turbo run build --filter=docs                                                                                                                         317.8s 
+ => exporting to image                                                                                                                                                     14.3s 
+ => => exporting layers                                                                                                                                                    14.3s 
+ => => writing image sha256:d17f90a2e3892191eedf6a10379e4fde1096b4eba39a13f681964486e1a6f4ef                                                                                0.0s 
+ => => naming to docker.io/library/mijn-ui-react:v1.0.2 

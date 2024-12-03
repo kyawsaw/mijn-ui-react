@@ -1,0 +1,40 @@
+root@mijnui-dev:~/mijn-ui-react# docker build -t mijn-ui-react:v1.0.0 .
+[+] Building 363.8s (16/16) FINISHED                                                                                                                              docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                        0.0s
+ => => transferring dockerfile: 1.07kB                                                                                                                                      0.0s
+ => [internal] load metadata for docker.io/library/node:18-alpine                                                                                                           2.9s
+ => [internal] load .dockerignore                                                                                                                                           0.0s
+ => => transferring context: 54B                                                                                                                                            0.0s
+ => [base 1/4] FROM docker.io/library/node:18-alpine@sha256:7e43a2d633d91e8655a6c0f45d2ed987aa4930f0792f6d9dd3bffc7496e44882                                                3.1s
+ => => resolve docker.io/library/node:18-alpine@sha256:7e43a2d633d91e8655a6c0f45d2ed987aa4930f0792f6d9dd3bffc7496e44882                                                     0.0s
+ => => sha256:7e43a2d633d91e8655a6c0f45d2ed987aa4930f0792f6d9dd3bffc7496e44882 7.67kB / 7.67kB                                                                              0.0s
+ => => sha256:7000d2e73f938c4f62fdda6d398d7dffd50e6c129409ae2b1a36ccebf9289ffe 1.72kB / 1.72kB                                                                              0.0s
+ => => sha256:870e987bd79332f29e9e21d7fa06ae028cfb507bb8bbca058f6eb60f7111cae9 6.20kB / 6.20kB                                                                              0.0s
+ => => sha256:da9db072f522755cbeb85be2b3f84059b70571b229512f1571d9217b77e1087f 3.62MB / 3.62MB                                                                              0.3s
+ => => sha256:aa6f657bab0c137ad8a7930532dbd7c53338023e828890090a4070f47a2ed65d 40.09MB / 40.09MB                                                                            0.7s
+ => => sha256:f477ea663f1c2a017b6f95e743b5ad72f8ff8bf861b0759a86ba1985f706308f 1.39MB / 1.39MB                                                                              0.8s
+ => => extracting sha256:da9db072f522755cbeb85be2b3f84059b70571b229512f1571d9217b77e1087f                                                                                   0.1s
+ => => sha256:43c47a581c29baa57713ee0da7af754f3994227b64949cb5e9e4dbbc2108c6cd 449B / 449B                                                                                  0.8s
+ => => extracting sha256:aa6f657bab0c137ad8a7930532dbd7c53338023e828890090a4070f47a2ed65d                                                                                   1.9s
+ => => extracting sha256:f477ea663f1c2a017b6f95e743b5ad72f8ff8bf861b0759a86ba1985f706308f                                                                                   0.1s
+ => => extracting sha256:43c47a581c29baa57713ee0da7af754f3994227b64949cb5e9e4dbbc2108c6cd                                                                                   0.0s
+ => [internal] load build context                                                                                                                                           0.2s
+ => => transferring context: 13.16MB                                                                                                                                        0.2s
+ => [base 2/4] RUN apk update                                                                                                                                               1.4s
+ => [base 3/4] RUN apk add --no-cache libc6-compat                                                                                                                          0.9s 
+ => [base 4/4] RUN yarn global add pnpm@9.12.3 turbo@2.3.0                                                                                                                  7.4s 
+ => [build 1/4] WORKDIR /app                                                                                                                                                0.0s 
+ => [runner 2/4] RUN addgroup --system --gid 1001 nodejs                                                                                                                    0.3s 
+ => [build 2/4] COPY . .                                                                                                                                                    0.2s 
+ => [build 3/4] RUN pnpm install --no-frozen-lockfile                                                                                                                      28.9s 
+ => [runner 3/4] RUN adduser --system --uid 1001 nextjs                                                                                                                     0.3s 
+ => [build 4/4] RUN turbo run build --filter=docs                                                                                                                         316.7s 
+ => [runner 4/4] COPY --from=build --chown=nextjs:nodejs /app/apps/docs/ /app/apps/docs/                                                                                    0.2s 
+ => exporting to image                                                                                                                                                      1.7s 
+ => => exporting layers                                                                                                                                                     1.7s 
+ => => writing image sha256:ff23d33f20b0cbc9ab0cb109d57ba1ae17871b67f8727b51c506bd85ffa94475                                                                                0.0s 
+ => => naming to docker.io/library/mijn-ui-react:v1.0.0                                                                                                                     0.0s 
+root@mijnui-dev:~/mijn-ui-react# docker images                                                                                                                                   
+REPOSITORY      TAG       IMAGE ID       CREATED          SIZE
+mijn-ui-react   v1.0.0    ff23d33f20b0   11 seconds ago   516MB
+root@mijnui-dev:~/mijn-ui-react# 
