@@ -1,3 +1,0 @@
-root@mijnui-dev:~/mijn-ui-react# docker run -p 3000:3000 mijn-ui-react:v1.0.0
- ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND  No package.json (or package.yaml, or package.json5) was found in "/app".
-root@mijnui-dev:~/mijn-ui-react# 
