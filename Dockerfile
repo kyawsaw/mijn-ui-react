@@ -13,7 +13,7 @@ COPY . .
 RUN pnpm install --no-frozen-lockfile
 RUN turbo run build --filter=docs
 EXPOSE 3000
-CMD ["pnpm", "run", "build"]
+CMD ["pnpm", "run", "start"]
 
 # Production
 FROM base AS runner
