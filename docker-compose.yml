@@ -1,0 +1,36 @@
+---
+version: "3.8"
+
+networks:
+  mijnui:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.11.0/24
+
+services:
+  docs.mijnui:
+    image: ghcr.io/kyawsaw/mijnui-docs:latest
+    container_name: docs.mijnui
+    networks:
+      mijnui:
+        ipv4_address: 172.16.11.101
+    ports:
+      - "3000"
+
+  nginx.mijnui:
+    image: nginx:latest
+    container_name: nginx.mijnui
+    volumes:
+      - "./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+      - "/etc/letsencrypt/:/etc/letsencrypt/"
+      - "./logs/nginx:/var/log/nginx"
+    depends_on: docs.mijnui
+    networks:
+      mijnui:
+        ipv4_address: 172.16.11.102
+    ports:
+      - "80"
+      - "443"
+
+
