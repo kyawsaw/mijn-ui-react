@@ -38,9 +38,21 @@ jobs:
     needs: build-and-push
 
     steps:
+      - name: Create SSH key
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private.key
+          sudo chmod 400 private.key
+          eval `ssh-agent -s`
+          ssh-add private.key
+          mkdir -p ~/.ssh
+          touch ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+
       - name: Deploy to Server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
+          cd ~/mijn-ui-react
           docker compose pull
           docker compose up -d
           EOF
