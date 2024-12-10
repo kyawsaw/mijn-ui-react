@@ -1,0 +1,46 @@
+name: CI/CD Pipeline with GHCR
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests to the main branch
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Log in to GitHub Container Registry
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PA_TOKEN }}
+
+      # Build the Docker image
+      - name: Build Docker Image
+        run: docker build -t ghcr.io/${{ github.repository_owner }}/mijnui-docs:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/mijnui-docs .
+
+      # Push the Docker image to GHCR
+      - name: Push Docker Image to GHCR
+        run: docker push ghcr.io/${{ github.repository_owner }}/mijnui-docs:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/mijnui-docs
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+
+    steps:
+      - name: Deploy to Server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
+          docker compose pull
+          docker compose up -d
+          EOF
