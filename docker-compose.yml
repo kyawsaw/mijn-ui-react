@@ -24,10 +24,13 @@ services:
     container_name: nginx.mijnui
     restart: unless-stopped
     volumes:
-      - "./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+      - "./nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
       - "/etc/letsencrypt/:/etc/letsencrypt/"
       - "./logs/nginx:/var/log/nginx"
-    depends_on: docs.mijnui
+    depends_on:
+      docs.mijnui:
+        condition: service_healthy
+        restart: unless-stopped
     networks:
       mijnui:
         ipv4_address: 172.16.11.102
