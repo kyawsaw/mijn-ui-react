@@ -30,7 +30,6 @@ services:
     depends_on:
       docs.mijnui:
         condition: service_healthy
-        restart: unless-stopped
     networks:
       mijnui:
         ipv4_address: 172.16.11.102
