@@ -28,8 +28,7 @@ services:
       - "/etc/letsencrypt/:/etc/letsencrypt/"
       - "./logs/nginx:/var/log/nginx"
     depends_on:
-      docs.mijnui:
-        condition: service_healthy
+      - docs.mijnui
     networks:
       mijnui:
         ipv4_address: 172.16.11.102
