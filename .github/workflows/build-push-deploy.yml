@@ -1,13 +1,20 @@
-name: CI/CD Pipeline with GHCR
+name: CI/CD Pipeline to build and push container image to GHCR for mijnui-docs
 
+# on:
+#  push:
+#    branches:
+#      - main  # Trigger on pushes to the main branch
+#  pull_request:
+#    branches:
+#      - main  # Trigger on pull requests to the main branch
+
+# Manual trigger
 on:
-  push:
-    branches:
-      - main  # Trigger on pushes to the main branch
-  pull_request:
-    branches:
-      - main  # Trigger on pull requests to the main branch
-
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'version tag eg. 1.0.0, 1.0.1'
+        default: {{ github.sha }}
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -17,7 +24,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Log in to GitHub Container Registry
+      # Log in to GitHub Container Registry 
+      # https://docs.docker.com/build/ci/github-actions/push-multi-registries/
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -25,15 +33,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.PA_TOKEN }}
 
-      # Build the Docker image
-      - name: Build Docker Image
-        run: docker build -f mijnui.dockerfile -t ghcr.io/${{ github.repository_owner }}/mijnui-docs:${{ github.sha }} -t ghcr.io/${{ github.repository_owner }}/mijnui-docs .
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
-      # Push the Docker image to GHCR
-      - name: Push Docker Image to GHCR
-        run: |
-          docker push ghcr.io/${{ github.repository_owner }}/mijnui-docs:${{ github.sha }}
-          docker push ghcr.io/${{ github.repository_owner }}/mijnui-docs
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/mijnui-docs:latest
+            ghcr.io/${{ github.repository_owner }}/mijnui-docs:${{ github.event.inputs.name }}
 
   deploy:
     runs-on: ubuntu-latest
