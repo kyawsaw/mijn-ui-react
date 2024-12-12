@@ -1,6 +1,6 @@
 name: CI/CD Pipeline to build and push container image to GHCR for mijnui-docs
 
- on:
+on:
   push:
     branches:
       - main
