@@ -1,4 +1,4 @@
-name: CI/CD Pipeline to build and push container image to GHCR for mijnui-docs
+name: Build and Push Container Image Then Deploy
 
 on:
   push:
@@ -35,6 +35,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
+          context: .
+          file: Dockerfile.docs
           platforms: linux/amd64
           push: true
           tags: |
