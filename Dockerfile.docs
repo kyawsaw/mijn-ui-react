@@ -11,7 +11,7 @@ RUN pnpm config set store-dir ~/.pnpm-store
 FROM base AS pruner
 WORKDIR /app
 COPY . .
-RUN turbo prune --scope=docs --docker
+RUN turbo prune --scope=@mijn-ui/docs --docker
 
 # Build the project
 FROM base AS builder
@@ -29,7 +29,7 @@ RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm install --frozen-lockfi
 # Copy source code of isolated subworkspace
 COPY --from=pruner /app/out/full/ .
 
-RUN pnpm build --filter=docs
+RUN pnpm run build:docs
 RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm prune --prod --no-optional
 RUN rm -rf ./**/*/src
 
