@@ -20,14 +20,13 @@
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist .turbo",
     "build": "tsup",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "types:check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@mijn-ui/react-theme": "workspace:*",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "@next/eslint-plugin-next": "^15.0.3",
@@ -38,10 +37,10 @@
     "tsup-config": "workspace:*"
   },
   "dependencies": {
+    "@mijn-ui/react-core": "workspace:*",
     "@mijn-ui/react-utilities": "workspace:*"
   },
   "peerDependencies": {
-    "@mijn-ui/react-core": "workspace:*",
     "react": "^19.0",
     "react-dom": "^19.0",
     "@mijn-ui/react-theme": ">=0.0.6"

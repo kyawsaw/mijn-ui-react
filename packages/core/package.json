@@ -20,7 +20,7 @@
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist .turbo",
     "build": "tsup",
     "test": "vitest",
     "lint": "eslint .",
@@ -30,11 +30,13 @@
     "react": "19.0.0",
     "@types/node": "22.9.0",
     "@types/react": "^19.0.0",
+    "tailwind-variants": "^0.3.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup-config": "workspace:*"
   },
   "dependencies": {
+    "tailwind-variants": "^0.3.0",
     "@mijn-ui/react-utilities": "workspace:*"
   },
   "peerDependencies": {
