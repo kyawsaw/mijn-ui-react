@@ -4,10 +4,21 @@ import { Inter } from "next/font/google"
 import ThemeProvider from "./components/providers/theme-provider"
 import "./css/global.css"
 import { RootProvider } from "fumadocs-ui/provider"
+import { baseUrl, createMetadata } from "@/lib/metadata"
 
 const inter = Inter({
   subsets: ["latin"],
   fallback: ["sans-serif"],
+})
+
+export const metadata = createMetadata({
+  title: {
+    template: "%s | MijnUI",
+    default: "MijnUI",
+  },
+  description:
+    "An open-source library built with Radix Primitives and Tailwind CSS, offering customizable, unstyled components.",
+  metadataBase: baseUrl,
 })
 
 // I'm not sure why the tailwindcss typography plugin isn't working in development mode.
@@ -30,17 +41,8 @@ export default function Layout({ children }: { children: ReactNode }) {
             }}
             search={{
               options: {
-                defaultTag: "next-js",
-                tags: [
-                  {
-                    name: "Next.js",
-                    value: "next-js",
-                  },
-                  {
-                    name: "Tailwind Css",
-                    value: "tailwind",
-                  },
-                ],
+                api: "/react/api/search",
+                type: "fetch",
               },
             }}
           >

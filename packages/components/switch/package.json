@@ -1,7 +1,7 @@
 {
   "name": "@mijn-ui/react-switch",
   "author": "Htet Aung Lin<htetaunglin.coder@gmail.com>",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "homepage": "https://mijn-ui.vercel.app",
   "license": "MIT",
   "type": "module",
@@ -27,22 +27,25 @@
     "types:check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@mijn-ui/react-theme": "workspace:*",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "@next/eslint-plugin-next": "^15.0.3",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup-config": "workspace:*"
   },
   "dependencies": {
-    "react": "19.0.0-rc-b01722d5-20241114",
-    "react-dom": "19.0.0-rc-b01722d5-20241114",
     "@mijn-ui/react-utilities": "workspace:*",
-    "@radix-ui/react-switch": "^1.1.1"
+    "@radix-ui/react-switch": "^1.1.2"
   },
   "peerDependencies": {
+    "@mijn-ui/react-core": "workspace:*",
     "react": "^19.0",
-    "react-dom": "^19.0"
+    "react-dom": "^19.0",
+    "@mijn-ui/react-theme": ">=0.0.6"
   },
   "publishConfig": {
     "access": "public"

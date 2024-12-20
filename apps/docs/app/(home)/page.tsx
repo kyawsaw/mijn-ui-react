@@ -1,6 +1,6 @@
 import Link from "next/link"
-import { buttonStyles } from "@mijn-ui/react-button"
-import { cn } from "@mijn-ui/react-utilities/shared"
+import { buttonStyles } from "@mijn-ui/react-theme"
+import { cn } from "@mijn-ui/react-utilities"
 
 export default function HomePage() {
   return (
@@ -9,27 +9,29 @@ export default function HomePage() {
         Reusable components for clean, responsive interfaces.
       </h1>
       <p className="w-full text-lg font-medium text-muted-text md:w-3/4">
-        An open-source component library built with Radix Primitives and
-        Tailwind CSS, inspired by ShadCN UI.
+        An open-source library built with Radix Primitives and Tailwind CSS,
+        offering customizable, unstyled components.
       </p>
 
       <div className="flex w-full items-center justify-start gap-2 md:justify-center">
         <Link
           className={cn(
-            buttonStyles({ size: "sm", className: "text-xs md:text-sm" }),
+            buttonStyles({
+              size: "sm",
+              className: "text-xs md:text-sm",
+            }).base(),
           )}
           href={"/docs"}
         >
           Getting Started
         </Link>
         <Link
-          className={cn(
-            buttonStyles({
-              size: "sm",
-              color: "secondary",
-              className: "text-xs md:text-sm",
-            }),
-          )}
+          className={buttonStyles({
+            size: "sm",
+            color: "secondary",
+            variant: "outlined",
+            className: "text-xs md:text-sm",
+          }).base()}
           href={"/blocks"}
         >
           Blocks

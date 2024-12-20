@@ -1,25 +1,37 @@
 "use client"
 
 import * as React from "react"
-import { UnstyledProvider, useUnstyled } from "@mijn-ui/react-utilities/context"
-import { VariantProps, cva } from "class-variance-authority"
-import { applyUnstyled, UnstyledProps } from "@mijn-ui/react-utilities/shared"
+import { applyUnstyled, UnstyledProps } from "@mijn-ui/react-core"
+import { createContext } from "@mijn-ui/react-utilities"
 import * as RadixAccordion from "@radix-ui/react-accordion"
 import { ChevronDownIcon } from "@mijn-ui/shared-icons"
+import { AccordionVariantProps, accordionStyles } from "@mijn-ui/react-theme"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
 
-const accordionStyles = cva("[&>div]:border-b-main-border [&>div]:border-b", {
-  variants: {
-    variant: {
-      default: "",
-      surface: "bg-surface rounded-xl px-4 pb-4 pt-2 shadow-sm",
-      bordered: "border-main-border rounded-xl border px-4 pb-4 pt-2",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-})
+/* -------------------------------------------------------------------------- */
+/*                              AccordionContext                              */
+/* -------------------------------------------------------------------------- */
 
+type AccordionContextType = UnstyledProps & {
+  styles: ReturnType<typeof accordionStyles>
+}
+
+export const [AccordionProvider, useAccordionContext] =
+  createContext<AccordionContextType>({
+    name: "AccordionContext",
+    strict: true,
+    errorMessage:
+      "useAccordionContext: `context` is undefined. Ensure the component is wrapped within <Accordion />",
+  })
+
+/* -------------------------------------------------------------------------- */
+/*                                AccordionHook                               */
+/* -------------------------------------------------------------------------- */
+
+const useAccordionStyles = (unstyledOverride?: boolean) => {
+  const context = useAccordionContext()
+  return useTVUnstyled(context, unstyledOverride)
+}
 /* -------------------------------------------------------------------------- */
 /*                                  Accordion                                 */
 /* -------------------------------------------------------------------------- */
@@ -27,7 +39,7 @@ const accordionStyles = cva("[&>div]:border-b-main-border [&>div]:border-b", {
 export type AccordionProps = React.ComponentPropsWithRef<
   typeof RadixAccordion.Root
 > &
-  VariantProps<typeof accordionStyles> &
+  AccordionVariantProps &
   UnstyledProps
 
 const Accordion = ({
@@ -35,18 +47,18 @@ const Accordion = ({
   unstyled = false,
   variant,
   ...props
-}: AccordionProps) => (
-  <UnstyledProvider unstyled={unstyled}>
-    <RadixAccordion.Root
-      className={applyUnstyled(
-        unstyled,
-        accordionStyles({ variant }),
-        className,
-      )}
-      {...props}
-    />
-  </UnstyledProvider>
-)
+}: AccordionProps) => {
+  const styles = accordionStyles({ variant })
+
+  return (
+    <AccordionProvider value={{ unstyled, styles }}>
+      <RadixAccordion.Root
+        className={applyUnstyled(unstyled, styles.base(), className)}
+        {...props}
+      />
+    </AccordionProvider>
+  )
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                AccordionItem                               */
@@ -62,15 +74,9 @@ const AccordionItem = ({
   unstyled,
   ...props
 }: AccordionItemProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { item } = useAccordionStyles(unstyled)
 
-  return (
-    <RadixAccordion.Item
-      className={applyUnstyled(isUnstyled, "w-full", className)}
-      {...props}
-    />
-  )
+  return <RadixAccordion.Item className={item({ className })} {...props} />
 }
 
 /* -------------------------------------------------------------------------- */
@@ -91,31 +97,17 @@ const AccordionTrigger = ({
   children,
   ...props
 }: AccordionTriggerProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const {
+    triggerWrapper,
+    trigger,
+    icon: iconStyles,
+  } = useAccordionStyles(unstyled)
 
   return (
-    <RadixAccordion.Header className={applyUnstyled(isUnstyled, "flex")}>
-      <RadixAccordion.Trigger
-        className={applyUnstyled(
-          isUnstyled,
-          "group flex w-full items-center justify-between py-3",
-          className,
-        )}
-        {...props}
-      >
+    <RadixAccordion.Header className={triggerWrapper()}>
+      <RadixAccordion.Trigger className={trigger({ className })} {...props}>
         {children}
-
-        {icon ? (
-          icon
-        ) : (
-          <ChevronDownIcon
-            className={applyUnstyled(
-              isUnstyled,
-              "h-4 w-4 shrink-0 text-muted-text duration-400 ease-in-out group-data-[state=open]:rotate-180",
-            )}
-          />
-        )}
+        {icon ? icon : <ChevronDownIcon className={iconStyles()} />}
       </RadixAccordion.Trigger>
     </RadixAccordion.Header>
   )
@@ -136,23 +128,18 @@ const AccordionContent = ({
   children,
   ...props
 }: AccordionContentProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { contentWrapper, content } = useAccordionStyles(unstyled)
 
   return (
-    <RadixAccordion.Content
-      className={applyUnstyled(
-        isUnstyled,
-        "overflow-hidden text-sm transition-[height] data-[state=closed]:animate-accordion-close data-[state=open]:animate-accordion-open",
-      )}
-      {...props}
-    >
-      <div className={applyUnstyled(isUnstyled, "pb-3 pt-0", className)}>
-        {children}
-      </div>
+    <RadixAccordion.Content className={contentWrapper()} {...props}>
+      <div className={content({ className })}>{children}</div>
     </RadixAccordion.Content>
   )
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                Exports                                     */
+/* -------------------------------------------------------------------------- */
 
 export {
   Accordion,

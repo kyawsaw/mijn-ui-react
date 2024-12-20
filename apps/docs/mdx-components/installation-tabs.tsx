@@ -25,7 +25,7 @@ const InstallationTabs = ({
       <TabsList className="h-12 w-full justify-start rounded-none border-b !bg-transparent">
         {items.map((item) => (
           <TabsTrigger
-            className="data-[state=active]:bg-surface rounded-md"
+            className="rounded-md data-[state=active]:bg-surface"
             key={item}
             value={item}
           >
@@ -36,7 +36,7 @@ const InstallationTabs = ({
 
       {value.toLocaleLowerCase() === "npm" && (
         <Alert
-          status={"danger"}
+          color={"danger"}
           title=""
           description="NPM packages are currently unstable and may cause issues. Use it at your own risk."
           className="unstable_alert mt-3 [&>p]:mt-0"

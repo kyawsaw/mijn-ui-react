@@ -2,21 +2,16 @@
 
 import React from "react"
 import { Button } from "@mijn-ui/react-button"
-import { buttonStyles } from "@mijn-ui/react-button"
 import { Checkbox } from "@mijn-ui/react-checkbox"
 import { Label } from "@mijn-ui/react-label"
 import { RadioGroup, RadioGroupItem } from "@mijn-ui/react-radio-group"
-import { VariantProps } from "class-variance-authority"
+import { ButtonVariantProps } from "@mijn-ui/react-theme"
 
 type ButtonOptionsType = {
   unstyled: boolean
-  variant: VariantProps<typeof buttonStyles>["variant"]
   loading: boolean
   disabled: boolean
-  color: VariantProps<typeof buttonStyles>["color"]
-  size: VariantProps<typeof buttonStyles>["size"]
-  radius: VariantProps<typeof buttonStyles>["radius"]
-}
+} & ButtonVariantProps
 
 const CheckboxWithLabel = ({
   id,
@@ -94,7 +89,7 @@ const KeyFeaturesPlayground = () => {
       <figcaption className="mb-3 text-base">Try it here!</figcaption>
 
       <div className="flex h-80 w-full flex-col items-center overflow-hidden rounded-md border sm:flex-row">
-        <div className="bg-main flex h-full min-h-32 flex-auto items-center justify-center">
+        <div className="flex h-full min-h-32 flex-auto items-center justify-center bg-main">
           <Button
             unstyled={buttonOptions.unstyled}
             loading={buttonOptions.loading}
@@ -108,7 +103,7 @@ const KeyFeaturesPlayground = () => {
           </Button>
         </div>
 
-        <div className="bg-surface flex size-full grow flex-col items-center gap-4 p-5 sm:max-w-80 xl:w-1/2 xl:max-w-none xl:flex-initial">
+        <div className="flex size-full grow flex-col items-center gap-4 bg-surface p-5 sm:max-w-80 xl:w-1/2 xl:max-w-none xl:flex-initial">
           <div className="flex items-center gap-5 sm:w-full">
             <CheckboxWithLabel
               id="unstyled"
@@ -146,7 +141,7 @@ const KeyFeaturesPlayground = () => {
               label="Variant"
               options={[
                 { value: "filled", id: "filled" },
-                { value: "outline", id: "outline" },
+                { value: "outlined", id: "outlined" },
                 { value: "text", id: "text" },
               ]}
             />

@@ -3,32 +3,31 @@ import {
   AlertIcon,
   AlertTitle,
   Alert as MijnUIAlert,
-  alertStyles,
 } from "@mijn-ui/react-alert"
-import { cn } from "@mijn-ui/react-utilities/shared"
-import { VariantProps } from "class-variance-authority"
+import { AlertVariantProps } from "@mijn-ui/react-theme"
+import { cn } from "@mijn-ui/react-utilities"
 import { LuAlertCircle, LuBug } from "react-icons/lu"
 
 type AlertProps = {
   title: string
   description: string
-  status?: VariantProps<typeof alertStyles>["status"]
+  color?: AlertVariantProps["color"]
   className?: string
 }
 
 const Alert = ({
   title,
   description,
-  status = "info",
+  color = "info",
   className,
 }: AlertProps) => {
-  const Icon = status === "danger" ? LuBug : LuAlertCircle
+  const Icon = color === "danger" ? LuBug : LuAlertCircle
 
   return (
     <MijnUIAlert
       className={cn("not-prose w-full backdrop-blur-md", className)}
-      variant="default"
-      status={status}
+      variant="subtle"
+      color={color}
     >
       <AlertIcon>
         <Icon />

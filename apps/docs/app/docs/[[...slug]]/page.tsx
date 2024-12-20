@@ -18,6 +18,7 @@ import {
   InstallationTabs,
   InstallationTabsContent,
 } from "@/mdx-components/installation-tabs"
+import { metadataImage } from "@/lib/metadata-image"
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>
@@ -30,7 +31,17 @@ export default async function Page(props: {
   const MDX = page.data.body
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      lastUpdate={page.data.lastModified}
+      editOnGithub={{
+        owner: "mijn-ui",
+        repo: "mijn-ui-react",
+        sha: "main",
+        path: `apps/docs/content/docs/${page.file.path}`,
+      }}
+    >
       <div className="flex w-full flex-col items-baseline justify-between gap-3 sm:flex-row">
         <DocsTitle className="md:text-4xl md:font-extrabold">
           {page.data.title}
@@ -50,7 +61,7 @@ export default async function Page(props: {
           {page.data.apiReference && (
             <Link
               target="_blank"
-              className="flex items-center gap-1 text-sm text-main-text/80 underline hover:text-primary"
+              className="flex items-center gap-1 text-sm text-main-text/80 underline hover:text-secondary-text/80"
               href={page.data.apiReference}
             >
               <LuExternalLink />
@@ -96,8 +107,11 @@ export async function generateMetadata(props: {
   const page = source.getPage(params.slug)
   if (!page) notFound()
 
-  return {
+  return metadataImage.withImage(page.slugs, {
     title: page.data.title,
     description: page.data.description,
-  }
+    openGraph: {
+      url: `/react/docs/${page.slugs.join("/")}`,
+    },
+  })
 }

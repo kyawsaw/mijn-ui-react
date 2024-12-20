@@ -1,25 +1,18 @@
 "use client"
 
 import * as React from "react"
-import { applyUnstyled, UnstyledProps } from "@mijn-ui/react-utilities/shared"
+import { createTVUnstyledSlots, UnstyledProps } from "@mijn-ui/react-core"
 import * as LabelPrimitive from "@radix-ui/react-label"
-import { type VariantProps, cva } from "class-variance-authority"
-
-const labelVariants = cva(
-  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-)
+import { labelStyles, LabelVariantProps } from "@mijn-ui/react-theme"
 
 type LabelProps = React.ComponentPropsWithRef<typeof LabelPrimitive.Root> &
-  VariantProps<typeof labelVariants> &
+  LabelVariantProps &
   UnstyledProps
 
 const Label = ({ unstyled, className, ...props }: LabelProps) => {
-  return (
-    <LabelPrimitive.Root
-      className={applyUnstyled(unstyled, labelVariants(), className)}
-      {...props}
-    />
-  )
+  const { base } = createTVUnstyledSlots(labelStyles(), unstyled)
+
+  return <LabelPrimitive.Root className={base({ className })} {...props} />
 }
 
 export { Label }

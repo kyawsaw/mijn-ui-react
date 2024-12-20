@@ -1,15 +1,12 @@
-import { cn } from "@mijn-ui/react-utilities/shared"
+import { skeletonStyles } from "@mijn-ui/react-theme"
+import { createTVUnstyledSlots, UnstyledProps } from "@mijn-ui/react-core"
 
-function Skeleton({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div
-      className={cn("bg-muted animate-pulse rounded-md", className)}
-      {...props}
-    />
-  )
+type SkeletonProps = React.ComponentPropsWithRef<"div"> & UnstyledProps
+
+function Skeleton({ unstyled, className, ...props }: SkeletonProps) {
+  const { base } = createTVUnstyledSlots(skeletonStyles(), unstyled)
+
+  return <div className={base({ className })} {...props} />
 }
 
 export { Skeleton }

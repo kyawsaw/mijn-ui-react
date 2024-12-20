@@ -1,14 +1,39 @@
 "use client"
 
 import * as React from "react"
-import { buttonStyles } from "@mijn-ui/react-button"
-import { UnstyledProvider, useUnstyled } from "@mijn-ui/react-utilities/context"
-import { UnstyledProps, applyUnstyled } from "@mijn-ui/react-utilities/shared"
+import { createContext } from "@mijn-ui/react-utilities"
+import { UnstyledProps } from "@mijn-ui/react-core"
 import { EllipsisIcon } from "@mijn-ui/shared-icons"
+import { paginationStyles } from "@mijn-ui/react-theme"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
+
+/* -------------------------------------------------------------------------- */
+/*                              PaginationContext                             */
+/* -------------------------------------------------------------------------- */
+
+type PaginationContextType = {
+  styles: ReturnType<typeof paginationStyles>
+  paginationRange: number[]
+  currentPage: number
+  prevEllipsisActive: boolean
+  nextEllipsisActive: boolean
+  setPage: (page: number) => void
+  goToPreviousPage: () => void
+  goToNextPage: () => void
+} & UnstyledProps
+
+const [PaginationProvider, usePaginationContext] =
+  createContext<PaginationContextType>({
+    name: "PaginationContext",
+    strict: true,
+    errorMessage:
+      "usePaginationContext: `context` is undefined. Seems you forgot to wrap component within <Pagination />",
+  })
 
 /* -------------------------------------------------------------------------- */
 /*                             usePagination Hook                            */
 /* -------------------------------------------------------------------------- */
+
 type usePaginationProps = {
   totalPages: number
   itemsPerPage: number
@@ -63,22 +88,16 @@ const usePaginationRange = ({
 }
 
 /* -------------------------------------------------------------------------- */
-/*                                 Pagination                                 */
+/*                               PaginationHook                               */
 /* -------------------------------------------------------------------------- */
-
-type PaginationContextType = {
-  paginationRange: number[]
-  currentPage: number
-  prevEllipsisActive: boolean
-  nextEllipsisActive: boolean
-  setPage: (page: number) => void
-  goToPreviousPage: () => void
-  goToNextPage: () => void
+const usePaginationStyles = (unstyledOverride?: boolean) => {
+  const context = usePaginationContext()
+  return useTVUnstyled(context, unstyledOverride)
 }
 
-const PaginationContext = React.createContext<
-  PaginationContextType | undefined
->(undefined)
+/* -------------------------------------------------------------------------- */
+/*                                 Pagination                                 */
+/* -------------------------------------------------------------------------- */
 
 type PaginationProps = {
   totalPages: number
@@ -127,31 +146,25 @@ const Pagination: React.FC<PaginationProps> = ({
     }
   }, [propsCurrentPage, isControlled])
 
+  const styles = paginationStyles()
+
   return (
-    <PaginationContext.Provider
+    <PaginationProvider
       value={{
+        unstyled,
+        styles,
         paginationRange: paginationRange.range,
-        currentPage,
         prevEllipsisActive: paginationRange.prevEllipsisActive,
         nextEllipsisActive: paginationRange.nextEllipsisActive,
+        currentPage,
         setPage,
         goToPreviousPage,
         goToNextPage,
       }}
     >
-      <UnstyledProvider unstyled={unstyled}>{children}</UnstyledProvider>
-    </PaginationContext.Provider>
+      {children}
+    </PaginationProvider>
   )
-}
-
-const usePagination = (): PaginationContextType => {
-  const context = React.useContext(PaginationContext)
-  if (context === undefined) {
-    throw new Error(
-      "usePaginationContext must be used within a PaginationProvider",
-    )
-  }
-  return context
 }
 
 /* -------------------------------------------------------------------------- */
@@ -165,19 +178,9 @@ const PaginationContent = ({
   unstyled,
   ...props
 }: PaginationContentProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { content } = usePaginationStyles(unstyled)
 
-  return (
-    <nav
-      className={applyUnstyled(
-        isUnstyled,
-        "flex items-center gap-2",
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <nav className={content({ className })} {...props} />
 }
 
 type PaginationListProps = React.ComponentProps<"ul"> & UnstyledProps
@@ -191,31 +194,14 @@ const PaginationList = ({
   unstyled,
   ...props
 }: PaginationListProps) => {
-  const { currentPage, setPage, paginationRange } = usePagination()
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { currentPage, setPage, paginationRange } = usePaginationContext()
+  const { list, item } = usePaginationStyles(unstyled)
 
   return (
-    <ul
-      className={applyUnstyled(
-        isUnstyled,
-        "flex flex-row items-center gap-1",
-        className,
-      )}
-      {...props}
-    >
+    <ul className={list({ className })} {...props}>
       {paginationRange.map((page, index) => (
         <li key={index} onClick={() => setPage(page)}>
-          <button
-            className={applyUnstyled(
-              isUnstyled,
-              buttonStyles({
-                variant: page === currentPage ? "outline" : "text",
-                color: "accent",
-                size: "icon",
-              }),
-            )}
-          >
+          <button className={item({ active: currentPage === page })}>
             {page}
           </button>
         </li>
@@ -236,23 +222,13 @@ const PaginationPreviousButton = ({
   unstyled,
   ...props
 }: PaginationPreviousButtonProps) => {
-  const { goToPreviousPage } = usePagination()
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { goToPreviousPage } = usePaginationContext()
+  const { previousBtn } = usePaginationStyles(unstyled)
 
   return (
     <button
       onClick={goToPreviousPage}
-      className={applyUnstyled(
-        isUnstyled,
-        buttonStyles({
-          variant: "text",
-          color: "accent",
-          size: "md",
-          className: "gap-1 font-medium",
-        }),
-        className,
-      )}
+      className={previousBtn({ className })}
       {...props}
     />
   )
@@ -269,23 +245,13 @@ const PaginationNextButton = ({
   unstyled,
   ...props
 }: PaginationNextButtonProps) => {
-  const { goToNextPage } = usePagination()
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { goToNextPage } = usePaginationContext()
+  const { nextBtn } = usePaginationStyles(unstyled)
 
   return (
     <button
       onClick={goToNextPage}
-      className={applyUnstyled(
-        isUnstyled,
-        buttonStyles({
-          variant: "text",
-          color: "accent",
-          size: "md",
-          className: "gap-1 pl-2.5 font-medium",
-        }),
-        className,
-      )}
+      className={nextBtn({ className })}
       {...props}
     />
   )
@@ -303,22 +269,13 @@ const PaginationPreviousEllipsis = ({
   unstyled,
   ...props
 }: PaginationPreviousEllipsisProps) => {
-  const { prevEllipsisActive } = usePagination()
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { prevEllipsisActive } = usePaginationContext()
+  const { previousElipsis } = usePaginationStyles(unstyled)
 
   if (!prevEllipsisActive) return
 
   return (
-    <span
-      aria-hidden
-      className={applyUnstyled(
-        isUnstyled,
-        "flex h-9 w-9 items-center justify-center",
-        className,
-      )}
-      {...props}
-    >
+    <span aria-hidden className={previousElipsis({ className })} {...props}>
       <EllipsisIcon className="size-4" />
     </span>
   )
@@ -335,22 +292,13 @@ const PaginationNextEllipsis = ({
   unstyled,
   ...props
 }: PaginationNextEllipsisProps) => {
-  const { nextEllipsisActive } = usePagination()
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { nextEllipsisActive } = usePaginationContext()
+  const { nextElipsis } = usePaginationStyles(unstyled)
 
   if (!nextEllipsisActive) return
 
   return (
-    <span
-      aria-hidden
-      className={applyUnstyled(
-        isUnstyled,
-        "flex h-9 w-9 items-center justify-center",
-        className,
-      )}
-      {...props}
-    >
+    <span aria-hidden className={nextElipsis({ className })} {...props}>
       <EllipsisIcon className="size-4" />
     </span>
   )
@@ -364,5 +312,5 @@ export {
   PaginationNextEllipsis,
   PaginationPreviousButton,
   PaginationPreviousEllipsis,
-  usePagination,
+  usePaginationContext,
 }

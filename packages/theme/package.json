@@ -1,7 +1,7 @@
 {
   "name": "@mijn-ui/react-theme",
   "author": "Htet Aung Lin<htetaunglin.coder@gmail.com>",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "homepage": "https://mijn-ui.vercel.app",
   "license": "MIT",
   "type": "module",
@@ -26,9 +26,8 @@
     "types:check": "tsc --noEmit"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.15",
-    "tailwindcss-animate": "^1.0.7",
     "eslint-config-custom": "workspace:*",
+    "tailwindcss": "^3.4.15",
     "tsconfig": "workspace:*",
     "tsup-config": "workspace:*"
   },
@@ -43,5 +42,9 @@
     "react",
     "tailwindcss-plugin",
     "theme"
-  ]
+  ],
+  "dependencies": {
+    "tailwind-variants": "^0.3.0",
+    "tailwindcss-animate": "^1.0.7"
+  }
 }

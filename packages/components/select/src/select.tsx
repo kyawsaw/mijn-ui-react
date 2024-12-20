@@ -1,35 +1,59 @@
 "use client"
 
 import * as React from "react"
-import { UnstyledProvider, useUnstyled } from "@mijn-ui/react-utilities/context"
-import {
-  applyUnstyled,
-  cn,
-  UnstyledProps,
-} from "@mijn-ui/react-utilities/shared"
+import { createContext } from "@mijn-ui/react-utilities"
+import { UnstyledProps } from "@mijn-ui/react-core"
 import * as SelectPrimitive from "@radix-ui/react-select"
 import {
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
 } from "@mijn-ui/shared-icons"
+import { selectStyles } from "@mijn-ui/react-theme"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
 
-const SelectGroup = SelectPrimitive.Group
+/* -------------------------------------------------------------------------- */
+/*                                SelectContext                               */
+/* -------------------------------------------------------------------------- */
 
-const SelectValue = SelectPrimitive.Value
+type SelectContextType = UnstyledProps & {
+  styles: ReturnType<typeof selectStyles>
+}
+
+const [SelectProvider, useSelectContext] = createContext<SelectContextType>({
+  name: "SelectContext",
+  strict: true,
+  errorMessage:
+    "useSelectContext: `context` is undefined. Seems you forgot to wrap component within <Select />",
+})
+
+/* -------------------------------------------------------------------------- */
+/*                                 SelectHook                                 */
+/* -------------------------------------------------------------------------- */
+
+const useSelectStyles = (unstyledOverride?: boolean) => {
+  const context = useSelectContext()
+  return useTVUnstyled(context, unstyledOverride)
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                   Select                                   */
 /* -------------------------------------------------------------------------- */
 
+const SelectGroup = SelectPrimitive.Group
+
+const SelectValue = SelectPrimitive.Value
+
 type SelectProps = React.ComponentProps<typeof SelectPrimitive.Root> &
   UnstyledProps
 
 const Select = ({ unstyled = false, ...props }: SelectProps) => {
+  const styles = selectStyles()
+
   return (
-    <UnstyledProvider unstyled={unstyled}>
+    <SelectProvider value={{ unstyled, styles }}>
       <SelectPrimitive.Root {...props} />
-    </UnstyledProvider>
+    </SelectProvider>
   )
 }
 
@@ -40,9 +64,7 @@ const Select = ({ unstyled = false, ...props }: SelectProps) => {
 type SelectTriggerProps = React.ComponentPropsWithRef<
   typeof SelectPrimitive.Trigger
 > &
-  UnstyledProps & {
-    icon?: React.ReactNode
-  }
+  UnstyledProps
 
 const SelectTrigger = ({
   unstyled,
@@ -50,21 +72,13 @@ const SelectTrigger = ({
   children,
   ...props
 }: SelectTriggerProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { trigger } = useSelectStyles(unstyled)
 
   return (
-    <SelectPrimitive.Trigger
-      className={applyUnstyled(
-        isUnstyled,
-        "flex h-10 w-full items-center justify-between rounded-md border border-main-border bg-surface px-3 py-2 text-sm placeholder:text-muted-text focus:border-input-border focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 hover:bg-accent",
-        className,
-      )}
-      {...props}
-    >
+    <SelectPrimitive.Trigger className={trigger({ className })} {...props}>
       {children}
       <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="size-4 opacity-50" />
+        <ChevronDownIcon />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   )
@@ -84,19 +98,14 @@ const SelectScrollUpButton = ({
   className,
   ...props
 }: SelectScrollUpButtonProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { scrollUpBtn } = useSelectStyles(unstyled)
 
   return (
     <SelectPrimitive.ScrollUpButton
-      className={applyUnstyled(
-        isUnstyled,
-        "flex cursor-default items-center justify-center py-1",
-        className,
-      )}
+      className={scrollUpBtn({ className })}
       {...props}
     >
-      <ChevronUpIcon className="size-4" />
+      <ChevronUpIcon className="" />
     </SelectPrimitive.ScrollUpButton>
   )
 }
@@ -115,16 +124,11 @@ const SelectScrollDownButton = ({
   className,
   ...props
 }: SelectScrollDownButtonProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { scrollDownBtn } = useSelectStyles(unstyled)
 
   return (
     <SelectPrimitive.ScrollDownButton
-      className={applyUnstyled(
-        isUnstyled,
-        "flex cursor-default items-center justify-center py-1",
-        className,
-      )}
+      className={scrollDownBtn({ className })}
       {...props}
     >
       <ChevronDownIcon className="size-4" />
@@ -148,32 +152,17 @@ const SelectContent = ({
   position = "popper",
   ...props
 }: SelectContentProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { content, viewport } = useSelectStyles(unstyled)
 
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
-        className={applyUnstyled(
-          isUnstyled,
-          cn(
-            "border-main-border bg-surface text-surface-text data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-bottom-6 data-[side=left]:slide-in-from-left-6 data-[side=right]:slide-in-from-right-6 data-[side=top]:slide-in-from-top-6 relative z-50 max-h-96 min-w-32 overflow-hidden rounded-lg border shadow-md !duration-300",
-            position === "popper" &&
-              "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
-          ),
-          className,
-        )}
+        className={content({ position, className })}
         position={position}
         {...props}
       >
         <SelectScrollUpButton />
-        <SelectPrimitive.Viewport
-          className={cn(
-            "p-1",
-            position === "popper" &&
-              "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
-          )}
-        >
+        <SelectPrimitive.Viewport className={viewport({ position })}>
           {children}
         </SelectPrimitive.Viewport>
         <SelectScrollDownButton />
@@ -192,19 +181,9 @@ type SelectLabelProps = React.ComponentPropsWithRef<
   UnstyledProps
 
 const SelectLabel = ({ unstyled, className, ...props }: SelectLabelProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { label } = useSelectStyles(unstyled)
 
-  return (
-    <SelectPrimitive.Label
-      className={applyUnstyled(
-        isUnstyled,
-        "py-1.5 pr-8 pl-2 text-sm font-semibold",
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <SelectPrimitive.Label className={label({ className })} {...props} />
 }
 
 /* -------------------------------------------------------------------------- */
@@ -222,28 +201,15 @@ const SelectItem = ({
   children,
   ...props
 }: SelectItemProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { item, itemIndicator } = useSelectStyles(unstyled)
 
   return (
-    <SelectPrimitive.Item
-      className={applyUnstyled(
-        isUnstyled,
-        "relative flex w-full cursor-default select-none items-center rounded-md py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-text data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[state=checked]:text-primary data-[state=checked]:bg-primary/10",
-        className,
-      )}
-      {...props}
-    >
+    <SelectPrimitive.Item className={item({ className })} {...props}>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
 
-      <span
-        className={applyUnstyled(
-          isUnstyled,
-          "absolute right-2 flex h-3.5 w-3.5 items-center justify-center",
-        )}
-      >
+      <span className={itemIndicator()}>
         <SelectPrimitive.ItemIndicator>
-          <CheckIcon className="size-4" />
+          <CheckIcon />
         </SelectPrimitive.ItemIndicator>
       </span>
     </SelectPrimitive.Item>
@@ -264,16 +230,11 @@ const SelectSeparator = ({
   className,
   ...props
 }: SelectSeparatorProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { separator } = useSelectStyles(unstyled)
 
   return (
     <SelectPrimitive.Separator
-      className={applyUnstyled(
-        isUnstyled,
-        "-mx-1 my-1 h-px bg-muted",
-        className,
-      )}
+      className={separator({ className })}
       {...props}
     />
   )

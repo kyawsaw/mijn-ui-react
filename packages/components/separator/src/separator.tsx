@@ -1,29 +1,35 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "@mijn-ui/react-utilities/shared"
+import { createTVUnstyledSlots, UnstyledProps } from "@mijn-ui/react-core"
 import * as SeparatorPrimitive from "@radix-ui/react-separator"
+import { separatorStyles } from "@mijn-ui/react-theme"
 
 type SeparatorProps = React.ComponentPropsWithRef<
   typeof SeparatorPrimitive.Root
->
+> &
+  UnstyledProps
 
 const Separator = ({
+  unstyled,
   className,
   orientation = "horizontal",
   decorative = true,
   ...props
-}: SeparatorProps) => (
-  <SeparatorPrimitive.Root
-    decorative={decorative}
-    orientation={orientation}
-    className={cn(
-      "bg-main-border shrink-0",
-      orientation === "horizontal" ? "h-px w-full" : "h-full w-px",
-      className,
-    )}
-    {...props}
-  />
-)
+}: SeparatorProps) => {
+  const { base } = createTVUnstyledSlots(
+    separatorStyles({ orientation }),
+    unstyled,
+  )
+
+  return (
+    <SeparatorPrimitive.Root
+      decorative={decorative}
+      orientation={orientation}
+      className={base({ className })}
+      {...props}
+    />
+  )
+}
 
 export { Separator }

@@ -1,7 +1,7 @@
 {
   "name": "@mijn-ui/react-date-picker",
   "author": "Htet Aung Lin<htetaunglin.coder@gmail.com>",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "homepage": "https://mijn-ui.vercel.app",
   "license": "MIT",
   "type": "module",
@@ -27,30 +27,32 @@
     "types:check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@mijn-ui/react-theme": "workspace:*",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "@next/eslint-plugin-next": "^15.0.3",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup-config": "workspace:*"
   },
   "dependencies": {
-    "react": "19.0.0-rc-b01722d5-20241114",
-    "react-dom": "19.0.0-rc-b01722d5-20241114",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "react-day-picker": "^9.3.0",
     "@mijn-ui/react-select": "workspace:*",
     "@mijn-ui/react-popover": "workspace:*",
     "@mijn-ui/react-calendar": "workspace:*",
     "@mijn-ui/react-button": "workspace:*",
     "@mijn-ui/react-utilities": "workspace:*",
-    "class-variance-authority": "^0.7.0",
-    "date-fns": "^4.1.0",
-    "date-fns-tz": "^3.2.0",
-    "react-day-picker": "^9.3.0",
     "@mijn-ui/shared-icons": "workspace:*"
   },
   "peerDependencies": {
+    "@mijn-ui/react-core": "workspace:*",
     "react": "^19.0",
-    "react-dom": "^19.0"
+    "react-dom": "^19.0",
+    "@mijn-ui/react-theme": ">=0.0.6"
   },
   "publishConfig": {
     "access": "public"

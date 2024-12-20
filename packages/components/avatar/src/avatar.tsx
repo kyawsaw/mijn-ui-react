@@ -1,33 +1,43 @@
 "use client"
 
 import * as React from "react"
-import { UnstyledProvider, useUnstyled } from "@mijn-ui/react-utilities/context"
+import { createContext } from "@mijn-ui/react-utilities"
 import {
   UnstyledProps,
   applyUnstyled,
-  cn,
-} from "@mijn-ui/react-utilities/shared"
+  createTVUnstyledSlots,
+} from "@mijn-ui/react-core"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
-import { VariantProps, cva } from "class-variance-authority"
+import {
+  avatarGroupStyles,
+  avatarStyles,
+  AvatarVariantProps,
+} from "@mijn-ui/react-theme"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
 
-export const avatarStyles = cva(
-  ["relative size-10 shrink-0 overflow-hidden rounded-full"],
-  {
-    variants: {
-      size: {
-        xxl: "size-16 text-base",
-        xl: "size-14 text-sm",
-        lg: "size-12 text-sm",
-        md: "size-10 text-sm",
-        sm: "size-8 text-xs",
-        xs: "size-6 text-xs",
-      },
-    },
-    defaultVariants: {
-      size: "md",
-    },
-  },
-)
+/* -------------------------------------------------------------------------- */
+/*                              AvatarContext                                  */
+/* -------------------------------------------------------------------------- */
+
+type AvatarContextType = UnstyledProps & {
+  styles: ReturnType<typeof avatarStyles>
+}
+
+const [AvatarProvider, useAvatarContext] = createContext<AvatarContextType>({
+  name: "AvatarContext",
+  strict: true,
+  errorMessage:
+    "useAvatarContext: `context` is undefined. Seems you forgot to wrap component within <Avatar />",
+})
+
+/* -------------------------------------------------------------------------- */
+/*                                 AvatarHook                                 */
+/* -------------------------------------------------------------------------- */
+
+const useAvatarStyles = (unstyledOverride?: boolean) => {
+  const context = useAvatarContext()
+  return useTVUnstyled(context, unstyledOverride)
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                 AvatarGroup                                */
@@ -44,24 +54,21 @@ const AvatarGroup = ({
   unstyled = false,
   ...props
 }: AvatarGroupProps) => {
+  const { group, groupRemainChildren } = createTVUnstyledSlots(
+    avatarGroupStyles(),
+    unstyled,
+  )
   const childArray = React.Children.toArray(children)
   const visibleChildren = max ? childArray.slice(0, max) : childArray
   const remainingChildrenCount = max ? childArray.length - max : 0
 
   return (
-    <UnstyledProvider unstyled={unstyled}>
-      <div
-        className={cn("flex items-center justify-center -space-x-2", className)}
-        {...props}
-      >
-        {visibleChildren}
-        {remainingChildrenCount > 0 && (
-          <span className="text-muted-text !ml-1.5 flex items-center justify-center text-xs">
-            +{remainingChildrenCount}
-          </span>
-        )}
-      </div>
-    </UnstyledProvider>
+    <div className={group({ className })} {...props}>
+      {visibleChildren}
+      {remainingChildrenCount > 0 && (
+        <span className={groupRemainChildren()}>+{remainingChildrenCount}</span>
+      )}
+    </div>
   )
 }
 
@@ -69,21 +76,20 @@ const AvatarGroup = ({
 /*                                   Avatar                                   */
 /* -------------------------------------------------------------------------- */
 
-export type AvatarVariantProps = VariantProps<typeof avatarStyles>
-
 type AvatarProps = React.ComponentPropsWithRef<typeof AvatarPrimitive.Root> &
   AvatarVariantProps &
   UnstyledProps
 
 const Avatar = ({ unstyled, size, className, ...props }: AvatarProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const styles = avatarStyles({ size })
 
   return (
-    <AvatarPrimitive.Root
-      className={applyUnstyled(isUnstyled, avatarStyles({ size }), className)}
-      {...props}
-    />
+    <AvatarProvider value={{ unstyled, styles }}>
+      <AvatarPrimitive.Root
+        className={applyUnstyled(unstyled, styles.base({ className }))}
+        {...props}
+      />
+    </AvatarProvider>
   )
 }
 
@@ -97,19 +103,9 @@ type AvatarImageProps = React.ComponentPropsWithRef<
   UnstyledProps
 
 const AvatarImage = ({ unstyled, className, ...props }: AvatarImageProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { image } = useAvatarStyles(unstyled)
 
-  return (
-    <AvatarPrimitive.Image
-      className={applyUnstyled(
-        isUnstyled,
-        "aspect-square h-full w-full object-cover",
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <AvatarPrimitive.Image className={image({ className })} {...props} />
 }
 
 /* -------------------------------------------------------------------------- */
@@ -126,18 +122,10 @@ const AvatarFallback = ({
   className,
   ...props
 }: AvatarFallbackProps) => {
-  const { unstyled: contextUnstyled } = useUnstyled()
-  const isUnstyled = unstyled ?? contextUnstyled
+  const { fallback } = useAvatarStyles(unstyled)
 
   return (
-    <AvatarPrimitive.Fallback
-      className={applyUnstyled(
-        isUnstyled,
-        "bg-muted flex h-full w-full items-center justify-center rounded-full",
-        className,
-      )}
-      {...props}
-    />
+    <AvatarPrimitive.Fallback className={fallback({ className })} {...props} />
   )
 }
 

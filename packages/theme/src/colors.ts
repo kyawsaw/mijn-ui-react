@@ -1,6 +1,6 @@
 import { Preset } from "."
 
-const defaultColors: Preset = {
+export const defaultColors: Preset = {
   light: {
     main: "210 14% 95%",
     "main-text": "0 0% 0%",
@@ -17,8 +17,8 @@ const defaultColors: Preset = {
     primary: "29 100% 52%",
     "primary-text": "0 0% 100%",
 
-    secondary: "33 100% 87%",
-    "secondary-text": "29 93% 39%",
+    secondary: "33 35% 50%",
+    "secondary-text": "0 0% 100%",
 
     info: "216 76% 52%",
     "info-text": "219 64% 43%",
@@ -59,8 +59,8 @@ const defaultColors: Preset = {
     primary: "29 100% 52%",
     "primary-text": "0 0% 100%",
 
-    secondary: "34 100% 82%",
-    "secondary-text": "29 93% 39%",
+    secondary: "33 35% 50%",
+    "secondary-text": "0 0% 100%",
 
     info: "216 76% 52%",
     "info-text": "207 70% 80%",
@@ -85,8 +85,4 @@ const defaultColors: Preset = {
     ring: "0 0% 96%",
     kanban: "0 0% 15%",
   },
-}
-
-export const presets = {
-  defaultColors,
 }
