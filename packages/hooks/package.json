@@ -1,7 +1,7 @@
 {
   "name": "@mijn-ui/react-hooks",
   "author": "Htet Aung Lin<htetaunglin.coder@gmail.com>",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "homepage": "https://mijn-ui.vercel.app",
   "license": "MIT",
   "type": "module",
@@ -12,7 +12,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mijn-ui/mijn-ui-react.git",
-    "directory": "packages/components/src"
+    "directory": "packages/hooks/src"
   },
   "bugs": {
     "url": "https://github.com/mijn-ui/mijn-ui-react/issues"
@@ -27,6 +27,8 @@
     "types:check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@mijn-ui/react-core": "workspace:*",
+    "@mijn-ui/react-theme": "workspace:*",
     "@next/eslint-plugin-next": "^15.0.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
@@ -38,13 +40,10 @@
     "tsconfig": "workspace:*",
     "tsup-config": "workspace:*"
   },
-  "dependencies": {
-    "@mijn-ui/react-core": "workspace:*"
-  },
   "peerDependencies": {
     "react": "^19.0",
     "react-dom": "^19.0",
-    "@mijn-ui/react-core": "workspace:*"
+    "@mijn-ui/react-core": "^0.0.3"
   },
   "peerDependenciesMeta": {
     "tailwindcss": {

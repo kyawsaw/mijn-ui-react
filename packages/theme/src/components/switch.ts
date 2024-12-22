@@ -9,4 +9,6 @@ const switchStyles = tv({
 })
 
 export type SwitchVariantProps = VariantProps<typeof switchStyles>
+export type SwitchSlots = keyof ReturnType<typeof switchStyles>
+
 export { switchStyles }

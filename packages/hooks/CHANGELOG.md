@@ -1,5 +1,22 @@
 # @mijn-ui-react/hooks
 
+## 0.0.10
+
+### Patch Changes
+
+- f524463: Update peer dependendicies.
+- Updated dependencies [f524463]
+  - @mijn-ui/react-core@0.0.3
+
+## 0.0.9
+
+### Patch Changes
+
+- ab36c61: extract core functionalities from utils.
+- Updated dependencies [d8a420b]
+- Updated dependencies [ab36c61]
+  - @mijn-ui/react-core@0.0.2
+
 ## 0.0.8
 
 ### Patch Changes

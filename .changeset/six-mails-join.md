@@ -1,5 +1,4 @@
 ---
-"@mijn-ui/react-utilities": patch
 "@mijn-ui/react-dropdown-menu": patch
 "@mijn-ui/react-alert-dialog": patch
 "@mijn-ui/react-autocomplete": patch
@@ -7,7 +6,6 @@
 "@mijn-ui/react-date-picker": patch
 "@mijn-ui/react-radio-group": patch
 "@mijn-ui/react-scroll-area": patch
-"@mijn-ui/shared-icons": patch
 "@mijn-ui/react-pagination": patch
 "@mijn-ui/react-accordion": patch
 "@mijn-ui/react-separator": patch
@@ -30,9 +28,6 @@
 "@mijn-ui/react-table": patch
 "@mijn-ui/react-card": patch
 "@mijn-ui/react-tabs": patch
-"@mijn-ui/react-hooks": patch
-"@mijn-ui/react-theme": patch
-"@mijn-ui/react-core": patch
 ---
 
-extract core functionalities from utils.
+Add classNames support.
