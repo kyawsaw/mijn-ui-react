@@ -1,23 +1,25 @@
 import * as React from "react"
-import { UnstyledProps, createTVUnstyledSlots } from "@mijn-ui/react-core"
-import { cn } from "@mijn-ui/react-utilities"
+import {
+  UnstyledComponentWithSlots,
+  UnstyledProps,
+  createTVUnstyledSlots,
+} from "@mijn-ui/react-core"
 import { Slot, Slottable } from "@radix-ui/react-slot"
 import { LoaderCircleIcon } from "@mijn-ui/shared-icons"
-import { ButtonVariantProps, buttonStyles } from "@mijn-ui/react-theme"
-import { ClassValue } from "tailwind-variants"
+import {
+  ButtonSlots,
+  ButtonVariantProps,
+  buttonStyles,
+} from "@mijn-ui/react-theme"
+import { cn } from "@mijn-ui/react-utilities"
 
-/**
- * This Typescript utility transform a list of slots into a list of {slot: classes}
- */
-export type SlotsToClasses<S extends string> = {
-  [key in S]?: ClassValue
-}
+type ButtonBaseProps = UnstyledComponentWithSlots<ButtonSlots> &
+  React.ComponentPropsWithRef<"button">
 
-export type ButtonProps = React.ComponentPropsWithRef<"button"> &
+export type ButtonProps = ButtonBaseProps &
   ButtonVariantProps & {
     asChild?: boolean
     loading?: boolean
-    classNames?: SlotsToClasses<keyof ReturnType<typeof buttonStyles>>
   } & UnstyledProps
 
 const Button = ({

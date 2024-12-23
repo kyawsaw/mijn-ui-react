@@ -1,7 +1,7 @@
 {
   "name": "@mijn-ui/react-accordion",
   "author": "Htet Aung Lin<htetaunglin.coder@gmail.com>",
-  "version": "0.0.8",
+  "version": "0.0.11",
   "homepage": "https://mijn-ui.vercel.app",
   "license": "MIT",
   "type": "module",
@@ -20,15 +20,16 @@
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist .turbo",
     "build": "tsup",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "types:check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^15.0.3",
+    "@mijn-ui/react-core": "workspace:*",
     "@mijn-ui/react-theme": "workspace:*",
+    "@next/eslint-plugin-next": "^15.0.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "eslint-config-custom": "workspace:*",
@@ -44,8 +45,8 @@
     "@mijn-ui/react-hooks": "workspace:*"
   },
   "peerDependencies": {
-    "@mijn-ui/react-theme": ">=0.0.6",
-    "@mijn-ui/react-core": "workspace:*",
+    "@mijn-ui/react-theme": "^0.0.8",
+    "@mijn-ui/react-core": "^0.0.3",
     "react": "^19.0",
     "react-dom": "^19.0"
   },

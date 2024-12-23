@@ -1,5 +1,17 @@
 # @mijn-ui/react-theme
 
+## 0.0.8
+
+### Patch Changes
+
+- d32f792: Add more slots and types
+
+## 0.0.7
+
+### Patch Changes
+
+- ab36c61: extract core functionalities from utils.
+
 ## 0.0.6
 
 ### Patch Changes

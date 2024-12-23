@@ -1,7 +1,7 @@
 {
   "name": "@mijn-ui/react-core",
   "author": "Htet Aung Lin<htetaunglin.coder@gmail.com>",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "homepage": "https://mijn-ui.vercel.app",
   "license": "MIT",
   "type": "module",
@@ -12,7 +12,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mijn-ui/mijn-ui-react.git",
-    "directory": "packages/utilities/src"
+    "directory": "packages/core/src"
   },
   "bugs": {
     "url": "https://github.com/mijn-ui/mijn-ui-react/issues"
@@ -20,7 +20,7 @@
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist .turbo",
     "build": "tsup",
     "test": "vitest",
     "lint": "eslint .",
@@ -30,11 +30,13 @@
     "react": "19.0.0",
     "@types/node": "22.9.0",
     "@types/react": "^19.0.0",
+    "tailwind-variants": "^0.3.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup-config": "workspace:*"
   },
   "dependencies": {
+    "tailwind-variants": "^0.3.0",
     "@mijn-ui/react-utilities": "workspace:*"
   },
   "peerDependencies": {

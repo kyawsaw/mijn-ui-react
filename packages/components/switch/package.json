@@ -1,7 +1,7 @@
 {
   "name": "@mijn-ui/react-switch",
   "author": "Htet Aung Lin<htetaunglin.coder@gmail.com>",
-  "version": "0.0.7",
+  "version": "0.0.10",
   "homepage": "https://mijn-ui.vercel.app",
   "license": "MIT",
   "type": "module",
@@ -20,13 +20,14 @@
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist .turbo",
     "build": "tsup",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "types:check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@mijn-ui/react-core": "workspace:*",
     "@mijn-ui/react-theme": "workspace:*",
     "react": "19.0.0",
     "react-dom": "19.0.0",
@@ -42,10 +43,10 @@
     "@radix-ui/react-switch": "^1.1.2"
   },
   "peerDependencies": {
-    "@mijn-ui/react-core": "workspace:*",
     "react": "^19.0",
     "react-dom": "^19.0",
-    "@mijn-ui/react-theme": ">=0.0.6"
+    "@mijn-ui/react-theme": "^0.0.8",
+    "@mijn-ui/react-core": "^0.0.3"
   },
   "publishConfig": {
     "access": "public"

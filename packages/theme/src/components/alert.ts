@@ -164,9 +164,10 @@ const alertStyles = tv({
   ],
   defaultVariants: {
     variant: "subtle",
-    color: "info",
+    color: "default",
   },
 })
 
 export type AlertVariantProps = VariantProps<typeof alertStyles>
+export type AlertSlots = keyof ReturnType<typeof alertStyles>
 export { alertStyles }

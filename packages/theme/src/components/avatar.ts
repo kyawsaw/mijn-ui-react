@@ -10,7 +10,7 @@ const avatarGroupStyles = tv({
 
 const avatarStyles = tv({
   slots: {
-    base: "relative shrink-0 overflow-hidden rounded-full",
+    base: "inline-block relative shrink-0 overflow-hidden rounded-full",
     image: "aspect-square size-full object-cover",
     fallback:
       "bg-muted flex size-full items-center justify-center rounded-full",
@@ -33,4 +33,7 @@ const avatarStyles = tv({
 
 export type AvatarVariantProps = VariantProps<typeof avatarStyles>
 export type AvatarGroupVariantProps = VariantProps<typeof avatarGroupStyles>
+export type AvatarGroupSlots = keyof ReturnType<typeof avatarGroupStyles>
+export type AvatarSlots = keyof ReturnType<typeof avatarStyles>
+
 export { avatarStyles, avatarGroupStyles }

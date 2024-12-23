@@ -1,4 +1,4 @@
 {
   "extends": "tsconfig/react-library.json",
-  "exclude": ["node_modules", "dist", "src/**/*.d.ts"]
+  "exclude": ["node_modules", "dist", "src/extend-variants.d.ts"]
 }
