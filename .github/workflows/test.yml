@@ -1,15 +1,15 @@
 name: Unit Tests
 
+# https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#running-a-workflow-based-on-the-conclusion-of-another-workflow
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches: [main, dev]
+  workflow_run:
+    workflows: [Lint]
+    types: [completed]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     strategy:
       matrix:
         node-version: [18]
@@ -33,3 +33,9 @@ jobs:
 
       - name: Run Tests
         run: pnpm test
+        
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'The triggering workflow failed'
