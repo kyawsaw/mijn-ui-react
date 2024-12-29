@@ -3,7 +3,8 @@ name: Build, Push and Deploy
 # https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#running-a-workflow-based-on-the-conclusion-of-another-workflow
 on:
   workflow_run:
-    workflows: ["Uint Tests"]
+    workflows:
+      - Unit Tests
     types: [completed]
 
 # https://stackoverflow.com/questions/75584775/trigger-a-github-workflow-if-two-other-workflows-have-been-successful
