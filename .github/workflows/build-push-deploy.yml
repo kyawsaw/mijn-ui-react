@@ -11,8 +11,8 @@ name: Build, Push and Deploy
 on:
   workflow_run:
     workflows:
-      - Unit Tests workflow
-      - Lint workflow
+      - Unit Tests
+      - Lint
     types:
       - completed
 
