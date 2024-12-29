@@ -1,13 +1,14 @@
 import { createPreset } from "fumadocs-ui/tailwind-plugin"
 import { mijnUiPreset } from "@mijn-ui/react-theme"
+import { withTV } from "tailwind-variants/dist/transformer.js"
 
 /** @type {import('tailwindcss').Config} */
-export default {
+export default withTV({
   content: [
     "./app/**/*.{ts,tsx}",
+    "./view/**/*.{ts,tsx}",
     "./examples/**/*.{ts,tsx,html}",
     "./content/**/*.{md,mdx}",
-    "./mdx-components/**/*.{ts,tsx}",
     "./blocks/**/*.{ts,tsx}",
 
     // I don't know why this path isn't working in production, so I have to include it this way for development and production
@@ -36,4 +37,4 @@ export default {
     },
   },
   plugins: [],
-}
+})

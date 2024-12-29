@@ -5,7 +5,7 @@ import Link from "next/link"
 import { TopRightRadialGradient } from "@/app/components/decorators/gradient-bg"
 import Logo from "@/app/components/logo"
 import ThemeToggler from "@/app/components/theme-toggler"
-import ClickAwayListener from "@/app/utils/click-away-listener"
+import ClickAwayListener from "@/app/components/utils/click-away-listener"
 import { Badge } from "@mijn-ui/react-badge"
 import { Button } from "@mijn-ui/react-button"
 import { buttonStyles } from "@mijn-ui/react-theme"
@@ -159,4 +159,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export { Navbar }
