@@ -1,16 +1,18 @@
 "use client"
 
 import * as React from "react"
+import { createTVUnstyledSlots } from "@mijn-ui/react-core"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
 import {
-  createTVUnstyledSlots,
+  RadioGroupSlots,
   UnstyledComponentWithSlots,
   UnstyledProps,
-} from "@mijn-ui/react-core"
-import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
+  cn,
+  radioGroupStyles,
+} from "@mijn-ui/react-theme"
+import { createContext } from "@mijn-ui/react-utilities"
 import { CircleIcon } from "@mijn-ui/shared-icons"
-import { radioGroupStyles, RadioGroupSlots } from "@mijn-ui/react-theme"
-import { createContext, cn } from "@mijn-ui/react-utilities"
-import { useTVUnstyled } from "@mijn-ui/react-hooks"
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 
 /* -------------------------------------------------------------------------- */
 /*                              RadioGroupContext                             */
@@ -72,7 +74,7 @@ const RadioGroup = ({
 /*                               RadioGroupItem                               */
 /* -------------------------------------------------------------------------- */
 
-type RadioGroupItemProps = React.ComponentPropsWithRef<
+export type RadioGroupItemProps = React.ComponentPropsWithRef<
   typeof RadioGroupPrimitive.Item
 > &
   UnstyledProps
@@ -98,4 +100,4 @@ const RadioGroupItem = ({
   )
 }
 
-export { RadioGroup, RadioGroupItem }
+export { RadioGroup, RadioGroupItem, useRadioGroupStyles }

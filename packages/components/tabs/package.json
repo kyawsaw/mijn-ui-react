@@ -1,7 +1,7 @@
 {
   "name": "@mijn-ui/react-tabs",
   "author": "Htet Aung Lin<htetaunglin.coder@gmail.com>",
-  "version": "0.0.11",
+  "version": "0.0.16",
   "homepage": "https://mijn-ui.vercel.app",
   "license": "MIT",
   "type": "module",
@@ -27,6 +27,9 @@
     "types:check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@mijn-ui/react-button": "workspace:*",
+    "@mijn-ui/react-card": "workspace:*",
+    "@mijn-ui/react-input": "workspace:*",
     "@mijn-ui/react-core": "workspace:*",
     "@mijn-ui/react-theme": "workspace:*",
     "react": "19.0.0",
@@ -46,8 +49,8 @@
   "peerDependencies": {
     "react": "^19.0",
     "react-dom": "^19.0",
-    "@mijn-ui/react-theme": "^0.0.8",
-    "@mijn-ui/react-core": "^0.0.3"
+    "@mijn-ui/react-theme": "^0.0.12",
+    "@mijn-ui/react-core": "^0.0.7"
   },
   "publishConfig": {
     "access": "public"

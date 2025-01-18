@@ -1,4 +1,14 @@
+import { Input } from "@mijn-ui/react-input"
 import type { Meta, StoryObj } from "@storybook/react"
+import {
+  LuCalculator,
+  LuCalendar,
+  LuCreditCard,
+  LuSearch,
+  LuSettings,
+  LuSmile,
+  LuUser,
+} from "react-icons/lu"
 import {
   Command,
   CommandEmpty,
@@ -10,14 +20,6 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "./command"
-import {
-  LuCalendar,
-  LuSmile,
-  LuCalculator,
-  LuUser,
-  LuCreditCard,
-  LuSettings,
-} from "react-icons/lu"
 
 const meta: Meta<typeof Command> = {
   title: "Components/Command",
@@ -36,10 +38,17 @@ type Story = StoryObj<typeof Command>
 const CommandTemplate = (args: CommandProps) => {
   return (
     <Command
-      className="border-main-border rounded-lg border shadow-md md:w-[450px]"
+      className="border-border rounded-large border-small shadow-medium md:w-[450px]"
       {...args}
     >
-      <CommandInput placeholder="Type a command or search..." />
+      <CommandInput asChild>
+        <Input
+          startIcon={<LuSearch />}
+          variant="underline"
+          placeholder="Type a command or search..."
+          className="bg-card"
+        />
+      </CommandInput>
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Suggestions">
@@ -82,13 +91,12 @@ const CommandTemplate = (args: CommandProps) => {
 const CommandUnstyled = (args: CommandProps) => {
   return (
     <Command
-      className="border-main-border rounded-lg border p-3 shadow-md md:w-[300px]"
+      className="border-border rounded-large border-small shadow-medium p-3 md:w-[300px]"
       classNames={{
-        inputWrapper: "flex items-center gap-2",
         item: "flex items-center pointer-events-none",
         shortcut: "ml-auto",
         separator: "border-b-2",
-        group: "flex flex-col gap-1 py-2 [&_[cmdk-group-heading]]:text-sm",
+        group: "flex flex-col gap-1 py-2 [&_[cmdk-group-heading]]:text-small",
       }}
       {...args}
     >

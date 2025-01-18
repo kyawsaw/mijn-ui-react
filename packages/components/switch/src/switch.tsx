@@ -1,13 +1,14 @@
 "use client"
 
 import * as React from "react"
+import { createTVUnstyledSlots } from "@mijn-ui/react-core"
 import {
-  createTVUnstyledSlots,
+  SwitchSlots,
   UnstyledComponentWithSlots,
-} from "@mijn-ui/react-core"
+  cn,
+  switchStyles,
+} from "@mijn-ui/react-theme"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
-import { SwitchSlots, switchStyles } from "@mijn-ui/react-theme"
-import { cn } from "@mijn-ui/react-utilities"
 
 export type SwitchProps = UnstyledComponentWithSlots<SwitchSlots> &
   React.ComponentPropsWithRef<typeof SwitchPrimitives.Root>

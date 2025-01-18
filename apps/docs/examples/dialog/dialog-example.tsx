@@ -1,4 +1,4 @@
-import { Button } from "@mijn-ui/react-button"
+import { Button } from "@mijn-ui/react"
 import {
   Dialog,
   DialogClose,
@@ -6,8 +6,8 @@ import {
   DialogDescription,
   DialogTitle,
   DialogTrigger,
-} from "@mijn-ui/react-dialog"
-import { Input } from "@mijn-ui/react-input"
+} from "@mijn-ui/react"
+import { Input } from "@mijn-ui/react"
 import { LuX } from "react-icons/lu"
 
 type DialogExampleProps = {
@@ -17,9 +17,11 @@ type DialogExampleProps = {
 const DialogExample = ({ unstyled = false }: DialogExampleProps) => {
   return (
     <Dialog unstyled={unstyled}>
-      <DialogTrigger>Sign In</DialogTrigger>
+      <DialogTrigger asChild>
+        <Button>Sign In</Button>
+      </DialogTrigger>
       <DialogContent className="relative ">
-        <DialogClose className="absolute right-4 top-4 border-none p-2 text-lg text-muted-text hover:text-main-text">
+        <DialogClose className="absolute right-4 top-4 border-none p-2 text-large text-muted-foreground hover:text-foreground">
           <LuX />
         </DialogClose>
         <div>
@@ -36,7 +38,10 @@ const DialogExample = ({ unstyled = false }: DialogExampleProps) => {
           <Input
             unstyled={unstyled}
             type="email"
-            classNames={{ label: "peer-focus:bg-surface" }}
+            className="bg-card"
+            classNames={{
+              label: "bg-card peer-focus:bg-card",
+            }}
             label="Email..."
             autoFocus
           />
@@ -44,13 +49,18 @@ const DialogExample = ({ unstyled = false }: DialogExampleProps) => {
             unstyled={unstyled}
             label="Password..."
             type="password"
-            classNames={{ label: "peer-focus:bg-surface" }}
+            className="bg-card"
+            classNames={{
+              label: "bg-card peer-focus:bg-card",
+            }}
           />
         </div>
         <div className="mt-4 flex items-center justify-end gap-2">
           <DialogClose>Close</DialogClose>
           <DialogClose asChild unstyled>
-            <Button unstyled={unstyled}>Submit</Button>
+            <Button unstyled={unstyled} color="primary">
+              Submit
+            </Button>
           </DialogClose>
         </div>
       </DialogContent>

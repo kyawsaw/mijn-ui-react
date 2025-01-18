@@ -1,16 +1,15 @@
-import { tv, VariantProps } from "tailwind-variants"
-import { commandStyles } from "./command"
-import { skeletonStyles } from "./skeleton"
+import { VariantProps } from "tailwind-variants"
+import { tv } from "../utils/tv"
 
 const autocompleteStyles = tv({
   slots: {
     base: "",
     trigger: "",
     content: "w-[--radix-popover-trigger-width] overflow-y-auto p-1",
-    contentEmpty: commandStyles().empty(),
-    skeleton: [...skeletonStyles().base(), "h-7 w-full"],
+    contentEmpty: "py-6 text-center text-small",
+    skeleton: "bg-muted animate-pulse rounded-medium h-7 w-full",
     group: "",
-    item: "data-[selected=true]:bg-accent relative flex w-full cursor-default select-none items-center justify-between gap-2 rounded-md px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-auto data-[disabled=true]:opacity-50",
+    item: "data-[selected=true]:bg-accent relative flex w-full cursor-default select-none items-center justify-between gap-2 rounded-medium px-2 py-1.5 text-small outline-none data-[disabled]:pointer-events-auto data-[disabled=true]:opacity-disabled",
   },
   variants: {
     selected: {

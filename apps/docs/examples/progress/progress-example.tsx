@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Progress } from "@mijn-ui/react-progress"
+import { Progress } from "@mijn-ui/react"
 
 const ProgressExample = () => {
   const [value, setValue] = React.useState<number>(0)
@@ -30,12 +30,12 @@ const ProgressExample = () => {
 
   return (
     <div className="w-80 space-y-1">
-      <div className="flex items-center justify-between text-sm font-medium text-main-text">
+      <div className="flex items-center justify-between text-small font-medium text-foreground">
         <h5>Progress Label</h5>
         <p>{value}%</p>
       </div>
       <Progress value={value} />
-      <div className="flex items-center justify-between text-xs text-muted-text">
+      <div className="flex items-center justify-between text-tiny text-muted-foreground">
         <p>min</p>
         <p>max</p>
       </div>

@@ -1,5 +1,5 @@
-import { extendVariants } from "@mijn-ui/react-core"
-import { Badge } from "@mijn-ui/react-badge"
+import { Badge } from "@mijn-ui/react"
+import { extendVariants } from "@mijn-ui/react"
 
 export const MyBadge = extendVariants(Badge, {
   variants: {
@@ -29,7 +29,7 @@ export const MyBadge = extendVariants(Badge, {
   compoundVariants: [
     // <- modify/add compound variants
     {
-      variant: "text",
+      variant: "ghost",
       color: "olive",
       class:
         "!bg-clip-text !text-transparent from-[#84cc16]/30 via-[#84cc16] to-[#84cc16]/30",

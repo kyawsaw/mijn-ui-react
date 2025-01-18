@@ -1,8 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useMediaQuery } from "@mijn-ui/react-hooks"
-import { CalendarFull } from "./components/calendar-full"
 import { EventDropArg, EventSourceInput } from "@fullcalendar/core"
 import { DropArg, EventResizeDoneArg } from "@fullcalendar/interaction"
 import {
@@ -12,18 +10,20 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogTitle,
-} from "@mijn-ui/react-alert-dialog"
-import { Button } from "@mijn-ui/react-button"
+} from "@mijn-ui/react"
+import { Button } from "@mijn-ui/react"
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@mijn-ui/react-dialog"
-import { Input } from "@mijn-ui/react-input"
+} from "@mijn-ui/react"
+import { Input } from "@mijn-ui/react"
+import { useMediaQuery } from "@mijn-ui/react-hooks"
 import { setMonth, setYear } from "date-fns"
 import { LuBug } from "react-icons/lu"
+import { CalendarFull } from "./components/calendar-full"
 
 const now = new Date()
 const currentYear = now.getFullYear()
@@ -284,7 +284,7 @@ const CalendarFullExample = () => {
 
   return (
     <div className="flex size-full items-center justify-center">
-      <div className="relative h-fit w-full max-w-screen-lg overflow-y-auto rounded-2xl bg-surface p-4">
+      <div className="relative h-fit w-full max-w-screen-lg overflow-y-auto rounded-2xl bg-card p-4">
         {/* TODO: Fix the hydration error */}
         <div className="size-full">
           <CalendarFull
@@ -315,15 +315,14 @@ const CalendarFullExample = () => {
               />
 
               <DialogFooter className="mt-4">
-                <Button
-                  type="button"
-                  variant="text"
-                  color="accent"
-                  onClick={closeDialogs}
-                >
+                <Button type="button" variant="ghost" onClick={closeDialogs}>
                   Cancel
                 </Button>
-                <Button type="submit" disabled={newEvent.title === ""}>
+                <Button
+                  color="primary"
+                  type="submit"
+                  disabled={newEvent.title === ""}
+                >
                   Create
                 </Button>
               </DialogFooter>

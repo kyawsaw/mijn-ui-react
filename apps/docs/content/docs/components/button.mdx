@@ -1,204 +1,261 @@
 ---
 title: Button
+description: A flexible and customizable button component for various actions.
 styleSource: https://github.com/mijn-ui/mijn-ui-react/blob/main/packages/theme/src/components/button.ts
 ---
 
-import { Button } from "@mijn-ui/react-button"
+import ButtonColors from "@/examples/button/button-colors"
+import ButtonExample from "@/examples/button/button-example"
+import ButtonFilled from "@/examples/button/button-filled"
+import ButtonGhost from "@/examples/button/button-ghost"
+import ButtonIconOnly from "@/examples/button/button-icon-only"
+import ButtonOutlined from "@/examples/button/button-outlined"
+import ButtonRadius from "@/examples/button/button-radius"
+import ButtonSizes from "@/examples/button/button-sizes"
+import ButtonSubtle from "@/examples/button/button-subtle"
 
-<ComponentPreview>
-  <Button>Button</Button>
-</ComponentPreview>
-
-### Installation
-
-<InstallationTabs items={["Npm", "Manual"]}>
-  <InstallationTabsContent value="Npm">
-  ```package-install
-  @mijn-ui/react-button
-  ```
-  </InstallationTabsContent>
-  <InstallationTabsContent value="Manual">
-  <Steps>
-<Step>
-  **Install Required Dependencies:** 
-  ```package-install
-  @radix-ui/react-slot
-  ```
-</Step>
-
-  <Step>
-    **Copy and paste the following code into  `mijn-ui` folder.**
-
+<MijnUITabs items={["Preview", "Code"]}>
+  <MijnUITabsContent value="Preview">
+    <ComponentPreview>
+      <ButtonExample />
+    </ComponentPreview>
+  </MijnUITabsContent>
+  <MijnUITabsContent value="Code">
     ```json doc-gen:file
     {
-      "file": "../../packages/components/button/src/button.tsx",
+      "file": "./examples/button/button-example.tsx",
       "codeblock": {
         "lang": "tsx",
-        "meta": "title=\"components/button.tsx\""
+        "meta": ""
       }
     }
     ```
-  </Step>
-</Steps>
-</InstallationTabsContent>
-</InstallationTabs>
+  </MijnUITabsContent>
+</MijnUITabs>
 
-**Example Usage**
+## Installation
+
+<MijnUITabs items={["Npm", "Manual"]}>
+  <MijnUITabsContent value="Npm">
+  ```package-install
+  @mijn-ui/react-button
+  ```
+  </MijnUITabsContent>
+  <MijnUITabsContent value="Manual">
+    <Steps>
+      <Step>
+        **Install Required Dependencies:** 
+        ```package-install
+        @radix-ui/react-slot
+        ```
+      </Step>
+
+      <Step>
+        **Copy and paste the following code into  `mijn-ui` folder.**
+
+        ```json doc-gen:file
+        {
+          "file": "../../packages/components/button/src/button.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"components/button.tsx\""
+          }
+        }
+        ```
+      </Step>
+    </Steps>
+
+  </MijnUITabsContent>
+</MijnUITabs>
+
+## Usage
 
 ```tsx
-<Button>Button</Button>
+import { Button } from "@mijn-ui/react-button"
+```
+
+```tsx
+<Button variant="outlined">Button</Button>
 ```
 
 ---
+
+## Example
 
 ### Colors
 
-<ComponentPreview className="flex-col md:flex-row">
-  <Button color="primary">Primary</Button>
-  <Button color="secondary">Secondary</Button>
-  <Button color="accent">Accent</Button>
-  <Button color="muted">Muted</Button>
-  <Button color="danger">Danger</Button>
-</ComponentPreview>
-
-```tsx
-<Button color="primary">Primary</Button>
-<Button color="secondary">Secondary</Button>
-<Button color="accent">Accent</Button>
-<Button color="muted">Muted</Button>
-<Button color="danger">Danger</Button>
-```
-
----
+<MijnUITabs items={["Preview", "Code"]}>
+  <MijnUITabsContent value="Preview">
+    <ComponentPreview className="flex-col md:flex-row">
+      <ButtonColors />
+    </ComponentPreview>
+  </MijnUITabsContent>
+  <MijnUITabsContent value="Code">
+    ```json doc-gen:file
+    {
+      "file": "./examples/button/button-colors.tsx",
+      "codeblock": {
+        "lang": "tsx",
+        "meta": ""
+      }
+    }
+    ```
+  </MijnUITabsContent>
+</MijnUITabs>
 
 ### Variants
 
 #### Filled
 
-There are four colors available for the filled variant `primary`, `accent`, `muted` and `danger`.
+<MijnUITabs items={["Preview", "Code"]}>
+  <MijnUITabsContent value="Preview">
+    <ComponentPreview className="flex-col md:flex-row">
+      <ButtonFilled />
+    </ComponentPreview>
+  </MijnUITabsContent>
+  <MijnUITabsContent value="Code">
+    ```json doc-gen:file
+    {
+      "file": "./examples/button/button-filled.tsx",
+      "codeblock": {
+        "lang": "tsx",
+        "meta": ""
+      }
+    }
+    ```
+  </MijnUITabsContent>
+</MijnUITabs>
 
-<ComponentPreview className="flex-col md:flex-row">
-  <Button variant="filled" color="primary">
-    Primary
-  </Button>
-  <Button variant="filled" color="secondary">
-    Secondary
-  </Button>
-  <Button variant="filled" color="accent">
-    Accent
-  </Button>
-  <Button variant="filled" color="muted">
-    Muted
-  </Button>
-  <Button variant="filled" color="danger">
-    Danger
-  </Button>
-</ComponentPreview>
+#### Outlined
 
-```tsx
-<Button variant="filled" color="primary">Primary</Button>
-<Button variant="filled" color="secondary">Secondary</Button>
-<Button variant="filled" color="accent">Accent</Button>
-<Button variant="filled" color="muted">Muted</Button>
-<Button variant="filled" color="danger">Danger</Button>
-```
+<MijnUITabs items={["Preview", "Code"]}>
+  <MijnUITabsContent value="Preview">
+    <ComponentPreview className="flex-col md:flex-row">
+      <ButtonOutlined />
+    </ComponentPreview>
+  </MijnUITabsContent>
+  <MijnUITabsContent value="Code">
+    ```json doc-gen:file
+    {
+      "file": "./examples/button/button-outlined.tsx",
+      "codeblock": {
+        "lang": "tsx",
+        "meta": ""
+      }
+    }
+    ```
+  </MijnUITabsContent>
+</MijnUITabs>
 
----
+#### Subtle
 
-#### Outline
+<MijnUITabs items={["Preview", "Code"]}>
+  <MijnUITabsContent value="Preview">
+    <ComponentPreview className="flex-col md:flex-row">
+      <ButtonSubtle />
+    </ComponentPreview>
+  </MijnUITabsContent>
+  <MijnUITabsContent value="Code">
+    ```json doc-gen:file
+    {
+      "file": "./examples/button/button-subtle.tsx",
+      "codeblock": {
+        "lang": "tsx",
+        "meta": ""
+      }
+    }
+    ```
+  </MijnUITabsContent>
+</MijnUITabs>
 
-There are four colors available for the outline variant `primary`, `accent`, `muted` and `danger`.
+#### Ghost
 
-<ComponentPreview className="flex-col md:flex-row">
-  <Button variant="outlined" color="primary">
-    Primary
-  </Button>
-  <Button variant="outlined" color="secondary">
-    Secondary
-  </Button>
-  <Button variant="outlined" color="accent">
-    Accent
-  </Button>
-  <Button variant="outlined" color="muted">
-    Muted
-  </Button>
-  <Button variant="outlined" color="danger">
-    Danger
-  </Button>
-</ComponentPreview>
-
-```tsx
-<Button variant="outlined" color="primary">Primary</Button>
-<Button variant="outlined" color="secondary">Secondary</Button>
-<Button variant="outlined" color="accent">Accent</Button>
-<Button variant="outlined" color="muted">Muted</Button>
-<Button variant="outlined" color="danger">Danger</Button>
-```
-
----
-
-#### Text
-
-There are four colors available for the text variant `primary`, `accent`, `muted` and `danger`.
-
-<ComponentPreview className="flex-col md:flex-row">
-  <Button variant="text" color="primary">
-    Primary
-  </Button>
-  <Button variant="text" color="secondary">
-    Secondary
-  </Button>
-  <Button variant="text" color="accent">
-    Accent
-  </Button>
-  <Button variant="text" color="muted">
-    Muted
-  </Button>
-  <Button variant="text" color="danger">
-    Danger
-  </Button>
-</ComponentPreview>
-
-```tsx
-<Button variant="text" color="primary">Primary</Button>
-<Button variant="text" color="secondary">Secondary</Button>
-<Button variant="text" color="accent">Accent</Button>
-<Button variant="text" color="muted">Muted</Button>
-<Button variant="text" color="danger">Danger</Button>
-```
-
----
+<MijnUITabs items={["Preview", "Code"]}>
+  <MijnUITabsContent value="Preview">
+    <ComponentPreview className="flex-col md:flex-row">
+      <ButtonGhost />
+    </ComponentPreview>
+  </MijnUITabsContent>
+  <MijnUITabsContent value="Code">
+    ```json doc-gen:file
+    {
+      "file": "./examples/button/button-ghost.tsx",
+      "codeblock": {
+        "lang": "tsx",
+        "meta": ""
+      }
+    }
+    ```
+  </MijnUITabsContent>
+</MijnUITabs>
 
 ### Radius
 
-<ComponentPreview className="flex-col md:flex-row">
-  <Button radius="sm">Button</Button>
-  <Button radius="md">Button</Button>
-  <Button radius="lg">Button</Button>
-  <Button radius="full">Button</Button>
-</ComponentPreview>
-
-```tsx
-<Button radius="sm">Button</Button>
-<Button radius="md">Button</Button>
-<Button radius="lg">Button</Button>
-<Button radius="full">Button</Button>
-```
-
----
+<MijnUITabs items={["Preview", "Code"]}>
+  <MijnUITabsContent value="Preview">
+    <ComponentPreview>
+      <ButtonRadius />
+    </ComponentPreview>
+  </MijnUITabsContent>
+  <MijnUITabsContent value="Code">
+    ```json doc-gen:file
+    {
+      "file": "./examples/button/button-radius.tsx",
+      "codeblock": {
+        "lang": "tsx",
+        "meta": ""
+      }
+    }
+    ```
+  </MijnUITabsContent>
+</MijnUITabs>
 
 ### Sizes
 
-<ComponentPreview className="flex-col md:flex-row">
-  <Button size="sm">Button</Button>
-  <Button size="md">Button</Button>
-  <Button size="lg">Button</Button>
-  <Button size="icon">B</Button>
-</ComponentPreview>
+<MijnUITabs items={["Preview", "Code"]}>
+  <MijnUITabsContent value="Preview">
+    <ComponentPreview>
+      <ButtonSizes />
+    </ComponentPreview>
+  </MijnUITabsContent>
+  <MijnUITabsContent value="Code">
+    ```json doc-gen:file
+    {
+      "file": "./examples/button/button-sizes.tsx",
+      "codeblock": {
+        "lang": "tsx",
+        "meta": ""
+      }
+    }
+    ```
+  </MijnUITabsContent>
+</MijnUITabs>
 
-```tsx
-<Button size="sm">Button</Button>
-<Button size="md">Button</Button>
-<Button size="lg">Button</Button>
-<Button size="icon">B</Button>
-```
+### IconOnly
+
+<MijnUITabs items={["Preview", "Code"]}>
+  <MijnUITabsContent value="Preview">
+    <ComponentPreview>
+      <ButtonIconOnly />
+    </ComponentPreview>
+  </MijnUITabsContent>
+  <MijnUITabsContent value="Code">
+    ```json doc-gen:file
+    {
+      "file": "./examples/button/button-icon-only.tsx",
+      "codeblock": {
+        "lang": "tsx",
+        "meta": ""
+      }
+    }
+    ```
+  </MijnUITabsContent>
+</MijnUITabs>
+---
+
+## Button Style Slots
+
+| **Slot Name** | **Targeted Component** | **Purpose**                        |
+| ------------- | ---------------------- | ---------------------------------- |
+| `base`        | `Button`               | Styles the button component.       |
+| `icon`        | `Button`               | Styles the icon inside the button. |

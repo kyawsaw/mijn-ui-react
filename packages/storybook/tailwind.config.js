@@ -1,4 +1,5 @@
-import { mijnUiPreset } from "@mijn-ui/react-theme"
+import { mijnui } from "@mijn-ui/react-theme"
+import animationPlugin from "tailwindcss-animate"
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -8,7 +9,7 @@ export default {
     "../components/*/stories/**/*.{js,jsx,ts,tsx}",
     "../theme/src/**/**/*.{js,jsx,ts,tsx}",
   ],
-  presets: [mijnUiPreset],
+  plugins: [animationPlugin, mijnui()],
   theme: {
     extend: {
       width: {

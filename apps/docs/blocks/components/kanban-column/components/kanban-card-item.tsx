@@ -1,17 +1,17 @@
-import { KanbanCard } from ".."
-import { useKanban } from "./context"
-import { KanbanCardItemType } from "./types"
 import { UniqueIdentifier } from "@dnd-kit/core"
 import {
   Avatar,
   AvatarFallback,
   AvatarGroup,
   AvatarImage,
-} from "@mijn-ui/react-avatar"
-import { Badge } from "@mijn-ui/react-badge"
-import { Progress } from "@mijn-ui/react-progress"
+} from "@mijn-ui/react"
+import { Badge } from "@mijn-ui/react"
+import { Progress } from "@mijn-ui/react"
 import { GoClock } from "react-icons/go"
 import { LuX } from "react-icons/lu"
+import { KanbanCard } from "../"
+import { useKanban } from "./context"
+import { KanbanCardItemType } from "./types"
 
 type KanbanCardItemProps = {
   itemId: UniqueIdentifier | null
@@ -37,15 +37,11 @@ const KanbanCardItem = ({
 
   return (
     <KanbanCard className="group relative w-full">
-      <h5 className="w-10/12 text-sm font-medium">{title}</h5>
+      <h5 className="w-10/12 text-small font-medium">{title}</h5>
 
       {tags?.map((tag: string) => (
         <div key={tag} className="flex flex-wrap">
-          <Badge
-            variant={"outlined"}
-            color="muted"
-            className="px-2 py-0.5 text-xs"
-          >
+          <Badge variant={"outlined"} className="px-2 py-0.5 text-tiny">
             {tag}
           </Badge>
         </div>
@@ -53,7 +49,7 @@ const KanbanCardItem = ({
 
       {progress && (
         <div className="space-y-1">
-          <div className="flex items-center justify-between text-xs text-muted-text">
+          <div className="flex items-center justify-between text-tiny text-muted-foreground">
             <h5>CheckList</h5>
             <p>3/4</p>
           </div>
@@ -61,23 +57,23 @@ const KanbanCardItem = ({
         </div>
       )}
 
-      <div className="flex w-full items-center justify-between text-muted-text">
+      <div className="flex w-full items-center justify-between text-muted-foreground">
         <div className="flex items-center gap-2 sm:gap-4">
           <div className="flex items-center gap-1">
             <GoClock size={20} />
-            <span className="text-xs">{status.createdAt}</span>
+            <span className="text-tiny">{status.createdAt}</span>
           </div>
           {status.comments && (
             <div className="flex items-center gap-1">
               <CommentIcon /> {/* customIcon */}
-              <span className="text-xs">2</span>
+              <span className="text-tiny">2</span>
             </div>
           )}
 
           {status.attachment && (
             <div className="flex items-center gap-1">
               <StatusIcon /> {/* customIcon */}
-              <span className="text-xs">5</span>
+              <span className="text-tiny">5</span>
             </div>
           )}
         </div>
@@ -94,7 +90,7 @@ const KanbanCardItem = ({
 
       <button
         onClick={handleOnDelete}
-        className="absolute -right-2 -top-6 flex size-5 items-center justify-center rounded-full border border-main-border bg-surface opacity-0 transition-opacity hover:brightness-90 group-hover:opacity-100"
+        className="absolute -right-2 -top-6 flex size-5 items-center justify-center rounded-full border-small border-border bg-card opacity-0 transition-opacity hover:brightness-90 group-hover:opacity-100"
       >
         <LuX size={12} />
       </button>

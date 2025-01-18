@@ -1,5 +1,41 @@
 # @mijn-ui-react/hooks
 
+## 0.0.15
+
+### Patch Changes
+
+- @mijn-ui/react-core@0.0.7
+
+## 0.0.14
+
+### Patch Changes
+
+- @mijn-ui/react-core@0.0.6
+
+## 0.0.13
+
+### Patch Changes
+
+- Updated dependencies [a7594eb]
+  - @mijn-ui/react-core@0.0.5
+
+## 0.0.12
+
+### Patch Changes
+
+- 3a9d89e: Update peer dependencies
+
+## 0.0.11
+
+### Patch Changes
+
+- 7b1ba9f: Update imports
+- 7b1ba9f: Update imports
+- 9ffa4c1: Beta release.
+- Updated dependencies [9ffa4c1]
+- Updated dependencies [7b1ba9f]
+  - @mijn-ui/react-core@0.0.4
+
 ## 0.0.10
 
 ### Patch Changes

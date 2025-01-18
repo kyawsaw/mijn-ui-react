@@ -12,7 +12,7 @@
 }
 
 h1 {
-  @apply bg-gradient-to-br from-main-text to-muted-text/70 bg-clip-text font-bold tracking-tight text-transparent;
+  @apply bg-gradient-to-br from-foreground to-muted-foreground/70 bg-clip-text font-bold tracking-tight text-transparent;
 }
 
 [data-search-full] {
@@ -47,7 +47,7 @@ h1 {
 
 #nd-docs-layout {
   .steps .step::before {
-    @apply bg-fd-card text-fd-card-foreground shadow-sm;
+    @apply bg-fd-card text-fd-card-foreground shadow-small;
   }
 
   [role="tablist"] {
@@ -56,13 +56,17 @@ h1 {
 }
 
 .fd-codeblock {
-  @apply bg-fd-card;
+  @apply !bg-fd-card;
 }
 
 /* override for the preview */
 
 .preview {
   [role="tablist"] {
-    @apply !bg-main;
+    @apply !bg-background;
   }
+}
+
+.fd-codeblock code {
+  font-size: 14px !important;
 }

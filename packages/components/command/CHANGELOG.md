@@ -1,5 +1,70 @@
 # @mijn-ui-react/command
 
+## 0.0.18
+
+### Patch Changes
+
+- 562f35f: Command Input will not have any default styling, allowing users to fully customize it and simplifying the component.
+- Updated dependencies [562f35f]
+  - @mijn-ui/react-theme@0.0.12
+  - @mijn-ui/react-dialog@0.0.18
+  - @mijn-ui/react-core@0.0.7
+  - @mijn-ui/react-hooks@0.0.15
+
+## 0.0.17
+
+### Patch Changes
+
+- @mijn-ui/react-dialog@0.0.17
+
+## 0.0.16
+
+### Patch Changes
+
+- Updated dependencies [32b1f0a]
+  - @mijn-ui/react-theme@0.0.11
+  - @mijn-ui/react-dialog@0.0.16
+  - @mijn-ui/react-core@0.0.6
+  - @mijn-ui/react-hooks@0.0.14
+
+## 0.0.15
+
+### Patch Changes
+
+- Updated dependencies [a7594eb]
+- Updated dependencies [6777e35]
+  - @mijn-ui/react-core@0.0.5
+  - @mijn-ui/react-theme@0.0.10
+  - @mijn-ui/react-dialog@0.0.15
+  - @mijn-ui/react-hooks@0.0.13
+
+## 0.0.14
+
+### Patch Changes
+
+- 3a9d89e: Update peer dependencies
+- Updated dependencies [3a9d89e]
+  - @mijn-ui/react-dialog@0.0.14
+  - @mijn-ui/react-hooks@0.0.12
+
+## 0.0.13
+
+### Patch Changes
+
+- 7b1ba9f: Update imports
+- 9ffa4c1: Beta release.
+- Updated dependencies [7b1ba9f]
+- Updated dependencies [7b1ba9f]
+- Updated dependencies [9ffa4c1]
+- Updated dependencies [7b1ba9f]
+- Updated dependencies [4256d76]
+  - @mijn-ui/react-hooks@0.0.11
+  - @mijn-ui/react-dialog@0.0.13
+  - @mijn-ui/react-utilities@0.0.9
+  - @mijn-ui/shared-icons@0.0.4
+  - @mijn-ui/react-theme@0.0.9
+  - @mijn-ui/react-core@0.0.4
+
 ## 0.0.12
 
 ### Patch Changes

@@ -7,9 +7,9 @@ import {
   AutocompleteGroup,
   AutocompleteItem,
   AutocompleteTrigger,
-} from "@mijn-ui/react-autocomplete"
-import { Input } from "@mijn-ui/react-input"
-import { ScrollArea } from "@mijn-ui/react-scroll-area"
+} from "@mijn-ui/react"
+import { Input } from "@mijn-ui/react"
+import { ScrollArea } from "@mijn-ui/react"
 import { LuSearch } from "react-icons/lu"
 
 const FRAMEWORKS = [
@@ -46,16 +46,11 @@ const AutocompleteWithScrollArea = () => {
     <Autocomplete value={value} onValueChange={setValue}>
       <AutocompleteTrigger asChild>
         <Input
-          className="bg-surface"
           placeholder={"Search for a framework"}
           startIcon={<LuSearch />}
         />
       </AutocompleteTrigger>
-      <AutocompleteContent
-        className=""
-        emptyMessage="No Frameworks Found"
-        loading={false}
-      >
+      <AutocompleteContent emptyMessage="No Frameworks Found" loading={false}>
         <ScrollArea className="flex max-h-52 flex-col overflow-y-auto">
           <AutocompleteGroup>
             {FRAMEWORKS.map((framework) => (

@@ -1,7 +1,7 @@
-import { Blocks } from "@/blocks"
+import React from "react"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import React from "react"
+import { Blocks } from "@/blocks"
 import { LuLoaderCircle } from "react-icons/lu"
 
 export async function generateMetadata({
@@ -48,7 +48,7 @@ const BlockPage = async ({
     <div className="h-screen w-screen overflow-hidden">
       <React.Suspense
         fallback={
-          <div className="flex w-full items-center justify-center text-sm text-muted-text">
+          <div className="flex w-full items-center justify-center text-small text-muted-foreground">
             <LuLoaderCircle className="mr-2 size-4 animate-spin" />
             Loading...
           </div>

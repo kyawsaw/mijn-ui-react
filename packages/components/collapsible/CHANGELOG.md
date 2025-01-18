@@ -1,5 +1,18 @@
 # @mijn-ui-react/collapsible
 
+## 0.0.11
+
+### Patch Changes
+
+- 3a9d89e: Update peer dependencies
+
+## 0.0.10
+
+### Patch Changes
+
+- 7b1ba9f: Update imports
+- 9ffa4c1: Beta release.
+
 ## 0.0.9
 
 ### Patch Changes

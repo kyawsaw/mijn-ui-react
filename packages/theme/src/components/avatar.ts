@@ -1,33 +1,40 @@
-import { tv, VariantProps } from "tailwind-variants"
+import { VariantProps } from "tailwind-variants"
+import { tv } from "../utils/tv"
 
 const avatarGroupStyles = tv({
   slots: {
     group: "flex items-center justify-center -space-x-2",
     groupRemainChildren:
-      "text-muted-text !ml-1.5 flex items-center justify-center text-xs",
+      "text-muted-foreground !ml-1.5 flex items-center justify-center text-tiny",
   },
 })
 
 const avatarStyles = tv({
   slots: {
-    base: "inline-block relative shrink-0 overflow-hidden rounded-full",
+    base: "inline-block relative shrink-0 overflow-hidden",
     image: "aspect-square size-full object-cover",
-    fallback:
-      "bg-muted flex size-full items-center justify-center rounded-full",
+    fallback: "bg-muted flex size-full items-center justify-center",
   },
-
   variants: {
     size: {
-      xxl: "size-16 text-base",
-      xl: "size-14 text-sm",
-      lg: "size-12 text-sm",
-      md: "size-10 text-sm",
-      sm: "size-8 text-xs",
-      xs: "size-6 text-xs",
+      xxl: "size-16 text-medium",
+      xl: "size-14 text-small",
+      lg: "size-12 text-small",
+      md: "size-10 text-small",
+      sm: "size-8 text-tiny",
+      xs: "size-6 text-tiny",
+    },
+    radius: {
+      none: "rounded-none",
+      sm: "rounded-small",
+      md: "rounded-medium",
+      lg: "rounded-large",
+      full: "rounded-full",
     },
   },
   defaultVariants: {
     size: "md",
+    radius: "full",
   },
 })
 
@@ -36,4 +43,4 @@ export type AvatarGroupVariantProps = VariantProps<typeof avatarGroupStyles>
 export type AvatarGroupSlots = keyof ReturnType<typeof avatarGroupStyles>
 export type AvatarSlots = keyof ReturnType<typeof avatarStyles>
 
-export { avatarStyles, avatarGroupStyles }
+export { avatarGroupStyles, avatarStyles }

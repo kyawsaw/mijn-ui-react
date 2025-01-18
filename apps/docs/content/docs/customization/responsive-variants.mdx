@@ -8,7 +8,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/app/components/resizable"
-import { BlockViewer } from "@/app/components/block-viewer"
+import { BlockViewer } from "@/app/components/mdx/block-viewer"
 import Link from "next/link"
 
 By default, Mijn-UI components don't provide responsive variants out of the box because there aren't many cases where you need them. Additionally, you can easily make components responsive by adding Tailwind CSS class names.
@@ -24,42 +24,25 @@ There are two main ways to create responsive variants:
 
 ## Making Components Responsive Using `tailwind-variants`
 
-{" "}
-<Alert
-  color="info"
-  className="mt-8"
-  description={
-    <span>
-      {" "}
-      Although you can use{" "}
-      <Link
-        className="underline decoration-primary text-main-text"
-        href="https://www.tailwind-variants.org/docs/getting-started#responsive-variants-optional"
-      >
-        tailwind-variants
-      </Link>{" "}
-      responsive variants to make the component responsive, it has a limitation
-      when it comes to making compound variants responsive. To overcome this
-      limitation, you can use the{" "}
-      <Link
-        className="underline decoration-primary text-main-text"
-        href="#making-component-responsive-using-use-responsive-variants-hook"
-      >
-        use-responsive-variants
-      </Link>{" "}
-      hook.{" "}
-    </span>
-  }
-/>
+<Alert color="info" className="mt-8">
+  Although you can use [tailwind-variants](https://www.tailwind-variants.org/docs/getting-started#responsive-variants-optional) to make components responsive, it has a limitation when it comes to making compound variants responsive. To overcome this limitation, you can use the [use-responsive-variants](#making-component-responsive-using-use-responsive-variants-hook) hook.
+</Alert>
 
 <Steps>
+  <Step>
+    ### Install necessary dependencies
+
+    ```package-install
+    tailwind-variants
+    ```
+  </Step>
   <Step>
     ### Configure Tailwind CSS
 
     To make responsive variants work smoothly, you need to wrap the Tailwind config with the `withTV` function from `tailwind-variants`. You can refer to the [tailwind-variants documentation](https://www.tailwind-variants.org/docs/getting-started#responsive-variants-optional) for more details.
 
     ```ts title="tailwind.config.ts"
-    import { mijnUiPreset } from "@mijn-ui/react-theme";
+    import { mijnui } from "@mijn-ui/react-theme";
     import { withTV } from "tailwind-variants/dist/transformer.js"; // [!code highlight]
 
     /** @type {import('tailwindcss').Config} */
@@ -67,23 +50,17 @@ There are two main ways to create responsive variants:
       content: [
         // ...
         // make sure it's pointing to the ROOT node_module
-        "./node_modules/@mijn-ui/react-theme/dist/**/*.{js,ts,jsx,tsx}",
+        "./node_modules/@mijn-ui/react-theme/dist/**/*.js",
       ],
-      presets: [mijnUiPreset],
+      plugins: [mijnui({})],
     }); // [!code highlight]
     ```
 
   </Step>
   <Step>
     ### Applying Responsive Variants to Component
-    
-    1. Install the `tailwind-variants` package:
 
-      ```package-install
-      tailwind-variants
-      ```
-
-    2. After installing the package, you can apply the responsive variants to the component like this:
+    You can apply the responsive variants to the component like this:
 
     ```json doc-gen:file
     {

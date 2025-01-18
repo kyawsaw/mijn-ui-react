@@ -1,11 +1,16 @@
 "use client"
 
 import * as React from "react"
-import { createContext, cn } from "@mijn-ui/react-utilities"
-import { UnstyledComponentWithSlots, UnstyledProps } from "@mijn-ui/react-core"
-import { EllipsisIcon } from "@mijn-ui/shared-icons"
-import { paginationStyles, PaginationSlots } from "@mijn-ui/react-theme"
 import { useTVUnstyled } from "@mijn-ui/react-hooks"
+import {
+  PaginationSlots,
+  UnstyledComponentWithSlots,
+  UnstyledProps,
+  cn,
+  paginationStyles,
+} from "@mijn-ui/react-theme"
+import { createContext } from "@mijn-ui/react-utilities"
+import { EllipsisIcon } from "@mijn-ui/shared-icons"
 
 /* -------------------------------------------------------------------------- */
 /*                              PaginationContext                             */
@@ -176,7 +181,8 @@ const Pagination: React.FC<PaginationProps> = ({
 /*                              PaginationContent                             */
 /* -------------------------------------------------------------------------- */
 
-type PaginationContentProps = React.ComponentPropsWithRef<"nav"> & UnstyledProps
+export type PaginationContentProps = React.ComponentPropsWithRef<"nav"> &
+  UnstyledProps
 
 const PaginationContent = ({
   className,
@@ -193,7 +199,7 @@ const PaginationContent = ({
   )
 }
 
-type PaginationListProps = React.ComponentProps<"ul"> & UnstyledProps
+export type PaginationListProps = React.ComponentProps<"ul"> & UnstyledProps
 
 /* -------------------------------------------------------------------------- */
 /*                               PaginationList                               */
@@ -205,7 +211,7 @@ const PaginationList = ({
   ...props
 }: PaginationListProps) => {
   const { currentPage, setPage, paginationRange } = usePaginationContext()
-  const { list, item, classNames } = usePaginationStyles(unstyled)
+  const { list, listItem, classNames } = usePaginationStyles(unstyled)
 
   return (
     <ul
@@ -215,9 +221,9 @@ const PaginationList = ({
       {paginationRange.map((page, index) => (
         <li key={index} onClick={() => setPage(page)}>
           <button
-            className={item({
+            className={listItem({
               active: currentPage === page,
-              className: classNames?.item,
+              className: classNames?.listItem,
             })}
           >
             {page}
@@ -258,7 +264,8 @@ const PaginationPreviousButton = ({
 /*                            PaginationNextButton                            */
 /* -------------------------------------------------------------------------- */
 
-type PaginationNextButtonProps = React.ComponentProps<"button"> & UnstyledProps
+export type PaginationNextButtonProps = React.ComponentProps<"button"> &
+  UnstyledProps
 
 const PaginationNextButton = ({
   className,
@@ -311,7 +318,8 @@ const PaginationPreviousEllipsis = ({
 /*                           PaginationNextEllipsis                           */
 /* -------------------------------------------------------------------------- */
 
-type PaginationNextEllipsisProps = React.ComponentProps<"span"> & UnstyledProps
+export type PaginationNextEllipsisProps = React.ComponentProps<"span"> &
+  UnstyledProps
 
 const PaginationNextEllipsis = ({
   className,
@@ -345,4 +353,5 @@ export {
   PaginationPreviousButton,
   PaginationPreviousEllipsis,
   usePaginationContext,
+  usePaginationStyles,
 }

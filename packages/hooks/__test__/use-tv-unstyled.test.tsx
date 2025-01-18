@@ -1,14 +1,13 @@
-import { it, expect, describe } from "vitest"
-import { tv } from "tailwind-variants"
-import { renderHook } from "@testing-library/react"
-import { useTVUnstyled } from "../src/use-tv-unstyled"
-import { UnstyledProps } from "@mijn-ui/react-core"
+import { UnstyledProps, tv } from "@mijn-ui/react-theme"
 import { createContext } from "@mijn-ui/react-utilities"
+import { renderHook } from "@testing-library/react"
+import { describe, expect, it } from "vitest"
+import { useTVUnstyled } from "../src/use-tv-unstyled"
 
 describe("useTVUnstyled", () => {
   // Constants for default classes
   const DEFAULT_CLASSES = {
-    base: "rounded-md",
+    base: "rounded-medium",
     icon: "p-4",
     indicator: "border-solid",
   }

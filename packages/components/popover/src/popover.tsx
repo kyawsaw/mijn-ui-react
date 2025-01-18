@@ -1,11 +1,16 @@
 "use client"
 
 import * as React from "react"
-import { createContext, cn } from "@mijn-ui/react-utilities"
-import { UnstyledComponentWithSlots, UnstyledProps } from "@mijn-ui/react-core"
-import * as RadixPopover from "@radix-ui/react-popover"
-import { popoverStyles, PopoverSlots } from "@mijn-ui/react-theme"
 import { useTVUnstyled } from "@mijn-ui/react-hooks"
+import {
+  PopoverSlots,
+  UnstyledComponentWithSlots,
+  UnstyledProps,
+  cn,
+  popoverStyles,
+} from "@mijn-ui/react-theme"
+import { createContext } from "@mijn-ui/react-utilities"
+import * as RadixPopover from "@radix-ui/react-popover"
 
 const PopoverArrow = RadixPopover.Arrow
 
@@ -61,7 +66,7 @@ const Popover = ({ unstyled = false, classNames, ...props }: PopoverProps) => {
 /*                               PopoverTrigger                               */
 /* -------------------------------------------------------------------------- */
 
-type PopoverTriggerProps = React.ComponentPropsWithRef<
+export type PopoverTriggerProps = React.ComponentPropsWithRef<
   typeof RadixPopover.Trigger
 > &
   UnstyledProps
@@ -85,7 +90,7 @@ const PopoverTrigger = ({
 /*                                PopoverClose                                */
 /* -------------------------------------------------------------------------- */
 
-type PopoverCloseProps = React.ComponentPropsWithRef<
+export type PopoverCloseProps = React.ComponentPropsWithRef<
   typeof RadixPopover.Close
 > &
   UnstyledProps
@@ -140,4 +145,5 @@ export {
   PopoverClose,
   PopoverContent,
   PopoverTrigger,
+  usePopoverStyles,
 }

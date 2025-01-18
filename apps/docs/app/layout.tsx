@@ -1,10 +1,11 @@
 import type { ReactNode } from "react"
 import dynamic from "next/dynamic"
 import { Inter } from "next/font/google"
-import ThemeProvider from "./components/providers/theme-provider"
-import "./css/global.css"
 import { RootProvider } from "fumadocs-ui/provider"
 import { baseUrl, createMetadata } from "@/lib/metadata"
+import ThemeProvider from "./components/providers/theme-provider"
+import { TooltipProvider } from "./components/tooltip"
+import "./css/global.css"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,7 +18,7 @@ export const metadata = createMetadata({
     default: "MijnUI",
   },
   description:
-    "An open-source library inspired by NextUI and Shadcn/ui, built with Radix Primitives and Tailwind CSS.",
+    "An open-source React component library built with Radix Primitives and Tailwind CSS for flexible, accessible, and responsive interfaces.",
   metadataBase: baseUrl,
 })
 
@@ -46,7 +47,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               },
             }}
           >
-            {children}
+            <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
           </RootProvider>
         </ThemeProvider>
       </body>

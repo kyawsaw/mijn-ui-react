@@ -1,4 +1,5 @@
-import { tv, VariantProps } from "tailwind-variants"
+import { VariantProps } from "tailwind-variants"
+import { tv } from "../utils/tv"
 import { buttonStyles } from "./button"
 
 const paginationStyles = tv({
@@ -6,7 +7,7 @@ const paginationStyles = tv({
     base: "",
     content: "flex items-center gap-2",
     list: "flex flex-row items-center gap-1",
-    item: "",
+    listItem: "",
     previousBtn: "",
     previousElipsis: "",
     nextBtn: "",
@@ -15,17 +16,15 @@ const paginationStyles = tv({
   variants: {
     active: {
       true: {
-        item: buttonStyles({
+        listItem: buttonStyles({
           variant: "outlined",
-          color: "accent",
-          size: "icon",
+          iconOnly: true,
         }).base(),
       },
       false: {
-        item: buttonStyles({
-          variant: "text",
-          color: "accent",
-          size: "icon",
+        listItem: buttonStyles({
+          variant: "ghost",
+          iconOnly: true,
         }).base(),
       },
     },
@@ -34,8 +33,8 @@ const paginationStyles = tv({
     {
       slots: ["previousBtn", "nextBtn"],
       class: buttonStyles({
-        variant: "text",
-        color: "accent",
+        variant: "ghost",
+
         size: "md",
         className: "gap-1 font-medium",
       }).base(),

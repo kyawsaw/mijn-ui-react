@@ -1,21 +1,20 @@
 "use client"
 
 import * as React from "react"
-import { cn, createContext } from "@mijn-ui/react-utilities"
+import { createTVUnstyledSlots } from "@mijn-ui/react-core"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
 import {
+  AvatarGroupSlots,
+  AvatarSlots,
+  AvatarVariantProps,
   UnstyledComponentWithSlots,
   UnstyledProps,
-  createTVUnstyledSlots,
-} from "@mijn-ui/react-core"
-import * as AvatarPrimitive from "@radix-ui/react-avatar"
-import {
   avatarGroupStyles,
   avatarStyles,
-  AvatarVariantProps,
-  AvatarSlots,
-  AvatarGroupSlots,
+  cn,
 } from "@mijn-ui/react-theme"
-import { useTVUnstyled } from "@mijn-ui/react-hooks"
+import { createContext } from "@mijn-ui/react-utilities"
+import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
 /* -------------------------------------------------------------------------- */
 /*                              AvatarContext                                  */
@@ -50,7 +49,7 @@ const useAvatarStyles = (unstyledOverride?: boolean) => {
 
 type AvatarGroupBaseProps = UnstyledComponentWithSlots<AvatarGroupSlots>
 
-type AvatarGroupProps = React.ComponentPropsWithRef<"div"> & {
+export type AvatarGroupProps = React.ComponentPropsWithRef<"div"> & {
   max?: number
 } & AvatarGroupBaseProps
 
@@ -145,7 +144,7 @@ const AvatarImage = ({ unstyled, className, ...props }: AvatarImageProps) => {
 /*                               AvatarFallback                               */
 /* -------------------------------------------------------------------------- */
 
-type AvatarFallbackProps = React.ComponentPropsWithRef<
+export type AvatarFallbackProps = React.ComponentPropsWithRef<
   typeof AvatarPrimitive.Fallback
 > &
   UnstyledProps
@@ -167,4 +166,4 @@ const AvatarFallback = ({
   )
 }
 
-export { Avatar, AvatarFallback, AvatarGroup, AvatarImage }
+export { Avatar, AvatarFallback, AvatarGroup, AvatarImage, useAvatarStyles }

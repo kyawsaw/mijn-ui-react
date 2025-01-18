@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from "@storybook/react"
-import {
-  Popover,
-  PopoverProps,
-  PopoverArrow,
-  PopoverClose,
-  PopoverContent,
-  PopoverTrigger,
-} from "./popover"
 import { Button } from "@mijn-ui/react-button"
 import { Input } from "@mijn-ui/react-input"
 import { Label } from "@mijn-ui/react-label"
+import type { Meta, StoryObj } from "@storybook/react"
 import { RxCross2, RxMixerHorizontal } from "react-icons/rx"
+import {
+  Popover,
+  PopoverArrow,
+  PopoverClose,
+  PopoverContent,
+  PopoverProps,
+  PopoverTrigger,
+} from "./popover"
 
 const meta: Meta<typeof Popover> = {
   title: "Components/Popover",
@@ -61,7 +61,7 @@ const PopoverTemplate = (args: PopoverProps) => {
       </PopoverTrigger>
       <PopoverContent className="relative w-72 ">
         <div className="flex flex-col justify-center gap-2.5">
-          <p className="text-base font-medium">Dimensions</p>
+          <p className="text-medium font-medium">Dimensions</p>
           {DATA.map((field) => {
             return (
               <fieldset
@@ -76,6 +76,10 @@ const PopoverTemplate = (args: PopoverProps) => {
                   {field.label}
                 </Label>
                 <Input
+                  className="bg-card"
+                  classNames={{
+                    label: "bg-card peer-focus:bg-card",
+                  }}
                   id={field.id}
                   name={field.name}
                   defaultValue={field.defaultValue}
@@ -87,9 +91,8 @@ const PopoverTemplate = (args: PopoverProps) => {
         </div>
         <PopoverClose unstyled asChild>
           <Button
-            color={"accent"}
-            variant={"text"}
-            size={"icon"}
+            variant="ghost"
+            iconOnly
             radius={"full"}
             className="absolute right-0 top-0 hover:bg-transparent"
             unstyled={args.unstyled}
@@ -97,7 +100,7 @@ const PopoverTemplate = (args: PopoverProps) => {
             <RxCross2 />
           </Button>
         </PopoverClose>
-        <PopoverArrow className="fill-muted-text" />
+        <PopoverArrow className="fill-muted-foreground" />
       </PopoverContent>
     </Popover>
   )
@@ -111,7 +114,7 @@ const PopoverUnstyled = (args: PopoverProps) => {
       </PopoverTrigger>
       <PopoverContent className="bg-accent relative w-72 p-4">
         <div className="flex flex-col justify-center gap-2.5">
-          <p className="text-base font-semibold">Dimensions</p>
+          <p className="text-medium font-semibold">Dimensions</p>
           {DATA.map((field) => {
             return (
               <fieldset
@@ -130,7 +133,7 @@ const PopoverUnstyled = (args: PopoverProps) => {
                   name={field.name}
                   defaultValue={field.defaultValue}
                   unstyled={args.unstyled}
-                  classNames={{ input: "w-full indent-2" }}
+                  className="w-full indent-2"
                 />
               </fieldset>
             )
@@ -138,9 +141,8 @@ const PopoverUnstyled = (args: PopoverProps) => {
         </div>
         <PopoverClose unstyled asChild>
           <Button
-            color={"accent"}
-            variant={"text"}
-            size={"icon"}
+            variant="ghost"
+            iconOnly
             radius={"full"}
             className="absolute right-4 top-4 hover:bg-transparent"
             unstyled={args.unstyled}
@@ -148,7 +150,7 @@ const PopoverUnstyled = (args: PopoverProps) => {
             <RxCross2 />
           </Button>
         </PopoverClose>
-        <PopoverArrow className="fill-muted-text" />
+        <PopoverArrow className="fill-muted-foreground" />
       </PopoverContent>
     </Popover>
   )

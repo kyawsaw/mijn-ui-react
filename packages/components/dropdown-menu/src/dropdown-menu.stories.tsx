@@ -1,22 +1,23 @@
+import React from "react"
+import { Button } from "@mijn-ui/react-button"
 import type { Meta, StoryObj } from "@storybook/react"
+import { LuFilter } from "react-icons/lu"
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuProps,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-  DropdownMenuCheckboxItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
 } from "./dropdown-menu"
-import React from "react"
-import { LuFilter } from "react-icons/lu"
 
 const meta: Meta<typeof DropdownMenu> = {
   title: "Components/DropdownMenu",
@@ -115,10 +116,8 @@ const DropdownMenuCheckBoxes = (args: DropdownMenuProps) => {
 
   return (
     <DropdownMenu {...args}>
-      <DropdownMenuTrigger className="bg-accent text-accent-text hover:bg-accent hover:opacity-75">
-        Manage Permissions
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuTrigger>Manage Permissions</DropdownMenuTrigger>
+      <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
         {permissions.map((permission) => (
           <DropdownMenuCheckboxItem
             key={permission.name}
@@ -153,12 +152,14 @@ const DropdownMenuRadioGroups = (args: DropdownMenuProps) => {
 
   return (
     <DropdownMenu {...args}>
-      <DropdownMenuTrigger className="bg-primary">
-        <LuFilter />
-        Filters
+      <DropdownMenuTrigger asChild unstyled>
+        <Button color="primary">
+          <LuFilter />
+          Filters
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-60">
-        <DropdownMenuLabel className="text-muted-text">
+        <DropdownMenuLabel className="text-muted-foreground">
           {BRANDS.label}
         </DropdownMenuLabel>
         <DropdownMenuRadioGroup
@@ -176,7 +177,7 @@ const DropdownMenuRadioGroups = (args: DropdownMenuProps) => {
           ))}
         </DropdownMenuRadioGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuLabel className="text-muted-text">
+        <DropdownMenuLabel className="text-muted-foreground">
           {PRICE_RANGES.label}
         </DropdownMenuLabel>
         <DropdownMenuRadioGroup
@@ -204,10 +205,10 @@ const DropdownMenuUnstyled = (args: DropdownMenuProps) => {
       {...args}
       classNames={{
         trigger: "bg-accent p-2",
-        content: "bg-accent p-4 shadow-md flex flex-col gap-2",
-        item: "pointer-events-none data-[disabled]:opacity-50",
+        content: "bg-accent p-4 shadow-medium flex flex-col gap-2",
+        item: "pointer-events-none data-[disabled]:opacity-disabled",
         subTrigger: "flex items-center",
-        subContent: "bg-accent px-4 py-2 flex flex-col gap-2 shadow-md",
+        subContent: "bg-accent px-4 py-2 flex flex-col gap-2 shadow-medium",
       }}
     >
       <DropdownMenuTrigger>Edit</DropdownMenuTrigger>

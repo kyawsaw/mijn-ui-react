@@ -1,6 +1,6 @@
 import React from "react"
-import { ScrollArea } from "@mijn-ui/react-scroll-area"
-import { Separator } from "@mijn-ui/react-separator"
+import { ScrollArea } from "@mijn-ui/react"
+import { Separator } from "@mijn-ui/react"
 
 const tags = Array.from({ length: 50 }).map(
   (_, i, a) => `v0.0.1-beta.${a.length - i}`,
@@ -8,12 +8,12 @@ const tags = Array.from({ length: 50 }).map(
 
 const ScrollAreaExample = () => {
   return (
-    <ScrollArea className="h-72 w-48 rounded-md border bg-surface">
+    <ScrollArea className="h-72 w-48 rounded-medium border-small bg-card">
       <div className="p-4">
-        <h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
+        <h4 className="mb-4 text-small font-medium leading-none">Tags</h4>
         {tags.map((tag) => (
           <React.Fragment key={tag}>
-            <div key={tag} className="text-sm">
+            <div key={tag} className="text-small">
               {tag}
             </div>
             <Separator className="my-2" />

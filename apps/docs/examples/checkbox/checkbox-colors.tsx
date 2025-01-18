@@ -1,5 +1,5 @@
-import { Checkbox } from "@mijn-ui/react-checkbox"
-import { Label } from "@mijn-ui/react-label"
+import { Checkbox } from "@mijn-ui/react"
+import { Label } from "@mijn-ui/react"
 
 const CheckboxColors = () => {
   return (
@@ -15,12 +15,12 @@ const CheckboxColors = () => {
       </div>
 
       <div className="flex items-center gap-2">
-        <Checkbox defaultChecked id="accent" color="accent" />
+        <Checkbox defaultChecked id="accent" color="default" />
         <Label htmlFor="accent">Accent</Label>
       </div>
 
       <div className="flex items-center gap-2">
-        <Checkbox defaultChecked id="muted" color="muted" />
+        <Checkbox defaultChecked id="muted" color="default" />
         <Label htmlFor="muted">Muted</Label>
       </div>
 

@@ -1,8 +1,8 @@
 # @mijn-ui/react-badge
 
-A small label used to indicate status or metadata.
+Displays a badge or a component that looks like a badge.
 
-[Documentation](https://mijn-ui.vercel.app/docs/components/badge)
+[Documentation](https://mijn-ui.vercel.app/react/docs/components/badge)
 
 ## Installation
 

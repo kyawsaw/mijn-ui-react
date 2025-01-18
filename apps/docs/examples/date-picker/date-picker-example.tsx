@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { CalendarDatePicker } from "@mijn-ui/react-date-picker"
+import { CalendarDatePicker } from "@mijn-ui/react"
 
 const CalendarDatePickerExample = () => {
   const [selectedDateRange, setSelectedDateRange] = useState({
@@ -15,13 +15,13 @@ const CalendarDatePickerExample = () => {
         Calendar Date Picker Component
       </h1>
       <CalendarDatePicker
-        color="accent"
+        color="default"
         date={selectedDateRange}
         onDateSelect={setSelectedDateRange}
       />
       <div className="mt-4">
-        <h2 className="text-md font-semibold">Selected Date Range:</h2>
-        <p className="text-sm">
+        <h2 className="text-medium font-semibold">Selected Date Range:</h2>
+        <p className="text-small">
           {selectedDateRange.from.toDateString()} -{" "}
           {selectedDateRange.to.toDateString()}
         </p>

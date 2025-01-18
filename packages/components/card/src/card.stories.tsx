@@ -1,16 +1,16 @@
+import { Button } from "@mijn-ui/react-button"
 import type { Meta, StoryObj } from "@storybook/react"
+import { IoBagOutline } from "react-icons/io5"
+import { LuArrowUpRight, LuPlus } from "react-icons/lu"
 import {
   Card,
   CardContent,
-  CardHeader,
-  CardTitle,
   CardDescription,
-  CardProps,
   CardFooter,
+  CardHeader,
+  CardProps,
+  CardTitle,
 } from "./card"
-import { Button } from "@mijn-ui/react-button"
-import { LuArrowUpRight, LuPlus } from "react-icons/lu"
-import { IoBagOutline } from "react-icons/io5"
 
 const meta: Meta<typeof Card> = {
   title: "Components/Card",
@@ -31,11 +31,10 @@ const CardTemplate = (args: CardProps) => {
     <Card className="relative max-w-60" {...args}>
       <CardHeader>
         <Button
-          variant={"text"}
-          color={"accent"}
-          size={"icon"}
+          variant="ghost"
+          iconOnly
           radius={"lg"}
-          className="bg-accent text-muted-text p-0 sm:size-12"
+          className="bg-accent text-muted-foreground p-0 sm:size-12"
           unstyled={args.unstyled}
           asChild
         >
@@ -44,12 +43,12 @@ const CardTemplate = (args: CardProps) => {
           </span>
         </Button>
 
-        <div className="text-muted-text absolute right-4 top-4">
+        <div className="text-muted-foreground absolute right-4 top-4">
           <LuArrowUpRight className="size-5 sm:size-6" />
         </div>
       </CardHeader>
       <CardContent>
-        <CardTitle className="text-base">Users</CardTitle>
+        <CardTitle className="text-medium">Users</CardTitle>
         <CardDescription>Manage user accounts and permissions.</CardDescription>
       </CardContent>
     </Card>
@@ -61,9 +60,8 @@ const CardStats = (args: CardProps) => {
     <Card className="max-w-44" {...args}>
       <CardHeader className="px-5 pb-5 sm:px-6 sm:pb-4">
         <Button
-          color="muted"
-          size={"icon"}
-          className="rounded-full p-0 sm:size-12"
+          iconOnly
+          className="bg-accent rounded-full p-0 sm:size-12"
           unstyled={args.unstyled}
         >
           <IoBagOutline className="size-4 sm:size-5" />
@@ -75,7 +73,7 @@ const CardStats = (args: CardProps) => {
         <CardTitle className="text-xl font-medium sm:text-2xl">
           $75,890.75
         </CardTitle>
-        <p className="text-muted-text text-xs font-normal">
+        <p className="text-muted-foreground text-tiny font-normal">
           <span className="text-success">+128%</span> from June
         </p>
       </CardContent>
@@ -85,7 +83,7 @@ const CardStats = (args: CardProps) => {
 
 const CardCustom = (args: CardProps) => {
   return (
-    <Card className="max-w-72 rounded-xl shadow-lg" {...args}>
+    <Card className="shadow-large max-w-72 rounded-xl" {...args}>
       <CardHeader className="relative py-12">
         <div className="absolute -top-32 left-0 w-full">
           <img
@@ -105,6 +103,7 @@ const CardCustom = (args: CardProps) => {
       <CardFooter className="overflow-hidden rounded-b-xl p-0">
         <Button
           radius="none"
+          color="primary"
           className="w-full gap-2 py-5 font-bold tracking-wider"
           unstyled={args.unstyled}
         >
@@ -121,10 +120,9 @@ const CardUnstyled = (args: CardProps) => {
       <CardHeader>
         <Button
           variant={"outlined"}
-          color={"muted"}
-          size={"icon"}
+          iconOnly
           radius={"lg"}
-          className="bg-accent text-muted-text p-0 sm:size-12"
+          className="text-muted-foreground p-0 sm:size-12"
           asChild
         >
           <span>
@@ -132,12 +130,12 @@ const CardUnstyled = (args: CardProps) => {
           </span>
         </Button>
 
-        <div className="text-muted-text absolute right-4 top-4">
+        <div className="text-muted-foreground absolute right-4 top-4">
           <LuArrowUpRight className="size-5 sm:size-6" />
         </div>
       </CardHeader>
       <CardContent>
-        <CardTitle className="text-base font-bold">Users</CardTitle>
+        <CardTitle className="text-medium font-bold">Users</CardTitle>
         <CardDescription>Manage user accounts and permissions.</CardDescription>
       </CardContent>
     </Card>

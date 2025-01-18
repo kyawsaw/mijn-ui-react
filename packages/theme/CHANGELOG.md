@@ -1,5 +1,49 @@
 # @mijn-ui/react-theme
 
+## 0.0.12
+
+### Patch Changes
+
+- 562f35f: ### Changes
+
+  - Renamed command slots and removed unnecessary slots.
+  - Renamed input slot for better clarity.
+
+  ### Updates
+
+  - Trigger elements like Alert-dialog and Dialog will no longer have default styling.
+  - Badge component now includes a subtle variant.
+  - Input wrapper slot name changed from "base" to "inputWrapper".
+  - Input component now has two variants: filled and underlined.
+  - Avatar styles now include a radius variant.
+  - Pagination styles renamed from "item" to "listItem".
+
+## 0.0.11
+
+### Patch Changes
+
+- 32b1f0a: Add button styles and select styles.
+
+## 0.0.10
+
+### Patch Changes
+
+- 6777e35: Add tailwindcss-animate as a peer dependencies.
+
+## 0.0.9
+
+### Patch Changes
+
+- 9ffa4c1: Beta release.
+- 4256d76: ### Replace Preset with Plugin and Update Components styles.
+
+  You can now customize the `theme`, `fontsize`, `hoverOpacity`, `lineHeight` in tailwind.config.ts file.
+
+  For more detail please refer to the [documentation](https://mijn-ui.vercel.app/react/docs)
+
+- Updated dependencies [9ffa4c1]
+  - @mijn-ui/react-utilities@0.0.9
+
 ## 0.0.8
 
 ### Patch Changes

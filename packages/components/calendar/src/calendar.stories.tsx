@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react"
-import { Calendar, CalendarProps } from "./calendar"
-import { Badge } from "@mijn-ui/react-badge"
 import React from "react"
+import { Badge } from "@mijn-ui/react-badge"
+import type { Meta, StoryObj } from "@storybook/react"
 import { DateRange } from "react-day-picker"
+import { Calendar, CalendarProps } from "./calendar"
 
 const meta: Meta<typeof Calendar> = {
   title: "Components/Calendar",
@@ -20,7 +20,7 @@ export default meta
 type Story = StoryObj<typeof Calendar>
 
 const renderDate = (date?: Date) => {
-  return <Badge color="muted">{date?.toLocaleDateString("UK")}</Badge>
+  return <Badge>{date?.toLocaleDateString("UK")}</Badge>
 }
 
 const renderDateRange = (dateRange?: DateRange) => {
@@ -40,10 +40,10 @@ const CalendarTemplate = (args: CalendarProps) => {
         selected={date}
         onSelect={setDate}
         showOutsideDays={args.showOutsideDays}
-        className="rounded-lg border"
+        className="rounded-large border"
         unstyled={args.unstyled}
       />
-      <p className="text-muted-text mt-2 text-sm">
+      <p className="text-muted-foreground text-small mt-2">
         Selected Date: {renderDate(date)}
       </p>
     </div>
@@ -59,10 +59,10 @@ const CalendarMultiple = (args: CalendarProps) => {
         selected={dates}
         onSelect={setDates}
         showOutsideDays={args.showOutsideDays}
-        className="rounded-lg border"
+        className="rounded-large border"
         unstyled={args.unstyled}
       />
-      <p className="text-muted-text mt-2 w-64 text-sm leading-6">
+      <p className="text-muted-foreground text-small mt-2 w-64 leading-6">
         Selected Dates: {dates?.map((date) => renderDate(date))}
       </p>
     </div>
@@ -78,10 +78,10 @@ const CalendarRange = (args: CalendarProps) => {
         selected={dateRange}
         onSelect={setDateRange}
         showOutsideDays={args.showOutsideDays}
-        className="rounded-lg border"
+        className="rounded-large border"
         unstyled={args.unstyled}
       />
-      <p className="text-muted-text mt-2 w-64 text-sm">
+      <p className="text-muted-foreground text-small mt-2 w-64">
         Selected Date Range: <br />
         {dateRange && renderDateRange(dateRange)}
       </p>
@@ -98,7 +98,7 @@ const CalendarUnstyled = (args: CalendarProps) => {
         selected={date}
         onSelect={setDate}
         showOutsideDays={args.showOutsideDays}
-        className="rounded-lg border p-4"
+        className="rounded-large border-small p-4"
         classNames={{
           button_previous: "absolute left-1 top-0 z-10",
           button_next: "absolute right-1 top-0 z-10",
@@ -106,12 +106,12 @@ const CalendarUnstyled = (args: CalendarProps) => {
           day_button: "p-2",
           months: "relative",
           month_caption: "flex justify-center",
-          outside: "text-muted-text opacity-50",
+          outside: "text-muted-foreground opacity-50",
           today: "bg-accent",
         }}
         unstyled={args.unstyled}
       />
-      <p className="text-muted-text mt-2 text-sm">
+      <p className="text-muted-foreground text-small mt-2">
         Selected Date: {renderDate(date)}
       </p>
     </div>

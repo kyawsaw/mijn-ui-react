@@ -1,17 +1,21 @@
 "use client"
 
 import * as React from "react"
+import { createTVUnstyledSlots } from "@mijn-ui/react-core"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
 import { Popover, PopoverAnchor, PopoverContent } from "@mijn-ui/react-popover"
-import { cn, createContext, mergeRefs } from "@mijn-ui/react-utilities"
 import {
+  AutocompleteSlots,
   UnstyledComponentWithSlots,
   UnstyledProps,
-  createTVUnstyledSlots,
-} from "@mijn-ui/react-core"
-import { Command as CommandPrimitive } from "cmdk"
+  autocompleteStyles,
+  cn,
+} from "@mijn-ui/react-theme"
+import { createContext, mergeRefs } from "@mijn-ui/react-utilities"
 import { CheckIcon } from "@mijn-ui/shared-icons"
-import { AutocompleteSlots, autocompleteStyles } from "@mijn-ui/react-theme"
-import { useTVUnstyled } from "@mijn-ui/react-hooks"
+import { Command as CommandPrimitive } from "cmdk"
+
+/* -------------------------------------------------------------------------- */
 
 type AutocompleteBaseProps = UnstyledComponentWithSlots<AutocompleteSlots>
 
@@ -158,7 +162,7 @@ const Autocomplete = ({
 /*                               AutocompleteTrigger                              */
 /* -------------------------------------------------------------------------- */
 
-type AutocompleteTriggerProps = React.ComponentPropsWithRef<
+export type AutocompleteTriggerProps = React.ComponentPropsWithRef<
   typeof CommandPrimitive.Input
 > &
   UnstyledProps
@@ -266,7 +270,7 @@ const AutocompleteContent = ({
 /*                              AutocompleteGroup                             */
 /* -------------------------------------------------------------------------- */
 
-type AutocompleteGroupProps = React.ComponentPropsWithRef<
+export type AutocompleteGroupProps = React.ComponentPropsWithRef<
   typeof CommandPrimitive.Group
 > &
   UnstyledProps
@@ -293,7 +297,7 @@ const AutocompleteGroup = ({
 /*                                AutocompleteItem                                */
 /* -------------------------------------------------------------------------- */
 
-type AutocompleteItemProps = React.ComponentPropsWithRef<
+export type AutocompleteItemProps = React.ComponentPropsWithRef<
   typeof CommandPrimitive.Item
 > &
   UnstyledProps
@@ -336,4 +340,5 @@ export {
   AutocompleteGroup,
   AutocompleteItem,
   AutocompleteTrigger,
+  useAutocompleteStyles,
 }

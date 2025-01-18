@@ -9,9 +9,10 @@ const meta: Meta<typeof Button> = {
   },
   args: {
     variant: "filled",
-    color: "primary",
+    color: "default",
     radius: "md",
     size: "md",
+    iconOnly: false,
     loading: false,
     disabled: false,
     unstyled: false,
@@ -21,12 +22,20 @@ const meta: Meta<typeof Button> = {
     variant: {
       type: "string",
       control: "select",
-      options: ["filled", "outlined", "text"],
+      options: ["filled", "outlined", "ghost", "subtle"],
     },
     color: {
       type: "string",
       control: "select",
-      options: ["primary", "secondary", "accent", "muted", "danger"],
+      options: [
+        "default",
+        "primary",
+        "secondary",
+        "success",
+        "info",
+        "warning",
+        "danger",
+      ],
     },
     radius: {
       type: "string",
@@ -36,7 +45,7 @@ const meta: Meta<typeof Button> = {
     size: {
       type: "string",
       control: "select",
-      options: ["sm", "md", "lg", "icon"],
+      options: ["xs", "sm", "md", "lg", "xl"],
     },
   },
 }
@@ -51,15 +60,21 @@ const ButtonTemplate = (args: ButtonProps) => {
 const ButtonColors = (args: ButtonProps) => {
   return (
     <div className="flex items-center gap-8">
-      <Button {...args}>Primary</Button>
+      <Button {...args}>Default</Button>
+      <Button {...args} color="primary">
+        Primary
+      </Button>
       <Button {...args} color="secondary">
         Secondary
       </Button>
-      <Button {...args} color="accent">
-        Accent
+      <Button {...args} color="success">
+        Success
       </Button>
-      <Button {...args} color="muted">
-        Muted
+      <Button {...args} color="info">
+        Info
+      </Button>
+      <Button {...args} color="warning">
+        Warning
       </Button>
       <Button {...args} color="danger">
         Danger
@@ -72,22 +87,28 @@ const ButtonVariants = (args: ButtonProps) => {
   return (
     <div className="flex flex-col items-center gap-12">
       <div>
-        <h3 className="text-muted-text mb-3 w-full text-start font-semibold">
+        <h3 className="text-muted-foreground mb-3 w-full text-start font-semibold">
           Filled
         </h3>
         <ButtonColors variant="filled" {...args} />
       </div>
       <div>
-        <h3 className="text-muted-text mb-3 w-full text-start font-semibold">
+        <h3 className="text-muted-foreground mb-3 w-full text-start font-semibold">
           Outlined
         </h3>
         <ButtonColors variant="outlined" />
       </div>
       <div>
-        <h3 className="text-muted-text mb-3 w-full text-start font-semibold">
-          Text
+        <h3 className="text-muted-foreground mb-3 w-full text-start font-semibold">
+          Subtle
         </h3>
-        <ButtonColors variant="text" />
+        <ButtonColors variant="subtle" />
+      </div>
+      <div>
+        <h3 className="text-muted-foreground mb-3 w-full text-start font-semibold">
+          Ghost
+        </h3>
+        <ButtonColors variant="ghost" />
       </div>
     </div>
   )
@@ -118,17 +139,18 @@ const ButtonRadius = (args: ButtonProps) => {
 const ButtonSizes = (args: ButtonProps) => {
   return (
     <div className="flex items-center gap-8">
-      <Button {...args} className="px-6">
+      <Button {...args}>xs</Button>
+      <Button {...args} size="sm">
         sm
       </Button>
-      <Button {...args} size="md" className="px-6">
+      <Button {...args} size="md">
         md
       </Button>
       <Button {...args} size="lg">
         lg
       </Button>
-      <Button {...args} size="icon">
-        icon
+      <Button {...args} size="xl">
+        xl
       </Button>
     </div>
   )
@@ -165,7 +187,15 @@ export const Radius: Story = {
 export const Sizes: Story = {
   render: ButtonSizes,
   args: {
-    size: "sm",
+    size: "xs",
+  },
+}
+
+export const IconOnly: Story = {
+  render: ButtonSizes,
+  args: {
+    size: "xs",
+    iconOnly: true,
   },
 }
 

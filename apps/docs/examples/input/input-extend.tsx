@@ -1,5 +1,5 @@
-import { extendVariants } from "@mijn-ui/react-core"
-import { Input } from "@mijn-ui/react-input"
+import { extendVariants } from "@mijn-ui/react"
+import { Input } from "@mijn-ui/react"
 
 export const MyInput = extendVariants(Input, {
   variants: {
@@ -8,7 +8,7 @@ export const MyInput = extendVariants(Input, {
       stone: {
         // <- add a new color variant
 
-        input: [
+        base: [
           // <- Input element slot
           "bg-zinc-400",
           "text-zinc-800",
@@ -22,33 +22,33 @@ export const MyInput = extendVariants(Input, {
     },
     size: {
       xs: {
-        base: "",
-        input: "h-6 min-h-6 px-1 text-xs",
+        wrapper: "",
+        base: "h-6 min-h-6 px-1 text-tiny",
       },
       md: {
-        base: "",
-        input: "h-10 min-h-10 text-sm",
+        wrapper: "",
+        base: "h-10 min-h-10 text-small",
       },
       xl: {
-        base: "",
-        input: "h-14 min-h-14 text-base",
+        wrapper: "",
+        base: "h-14 min-h-14 text-medium",
       },
     },
     radius: {
       none: {
-        input: "rounded-none",
+        base: "rounded-none",
       },
       sm: {
-        input: "rounded-sm",
+        base: "rounded-small",
       },
       md: {
-        input: "rounded-md",
+        base: "rounded-medium",
       },
       lg: {
-        input: "rounded-lg",
+        base: "rounded-large",
       },
       full: {
-        input: "rounded-full",
+        base: "rounded-full",
       },
     },
   },

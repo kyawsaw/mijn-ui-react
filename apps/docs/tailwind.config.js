@@ -1,9 +1,11 @@
+import { mijnui } from "@mijn-ui/react"
 import { createPreset } from "fumadocs-ui/tailwind-plugin"
-import { mijnUiPreset } from "@mijn-ui/react-theme"
 import { withTV } from "tailwind-variants/dist/transformer.js"
+import animationPlugin from "tailwindcss-animate"
 
 /** @type {import('tailwindcss').Config} */
 export default withTV({
+  darkMode: "class",
   content: [
     "./app/**/*.{ts,tsx}",
     "./view/**/*.{ts,tsx}",
@@ -17,10 +19,7 @@ export default withTV({
     "./node_modules/@mijn-ui/**/dist/*.js",
     "./node_modules/fumadocs-ui/dist/**/*.js",
   ],
-  presets: [
-    createPreset({ cssPrefix: "fd", addGlobalColors: false }),
-    mijnUiPreset,
-  ],
+  presets: [createPreset({ cssPrefix: "fd", addGlobalColors: false })],
   theme: {
     extend: {
       fontSize: {
@@ -36,5 +35,5 @@ export default withTV({
       },
     },
   },
-  plugins: [],
+  plugins: [animationPlugin, mijnui({})], // !need to update the doucmentation for this
 })

@@ -1,16 +1,21 @@
-import { Button, ButtonProps } from "@mijn-ui/react-button"
-import { buttonStyles, ButtonVariantProps } from "@mijn-ui/react-theme"
-import { tv, VariantProps } from "tailwind-variants"
+import { Button, ButtonProps } from "@mijn-ui/react"
+import {
+  ButtonVariantProps,
+  VariantProps,
+  buttonStyles,
+  tv,
+} from "@mijn-ui/react"
 
 const responsiveButton = tv(
   {
     extend: buttonStyles,
     variants: {
       size: {
-        sm: "h-9 w-fit px-3",
-        md: "h-10 w-fit px-3",
-        lg: "h-11 w-fit px-8",
-        icon: "size-10",
+        xs: "h-8 px-2 text-small",
+        sm: "h-9 px-3 text-small",
+        md: "h-10 px-3.5 text-small",
+        lg: "h-11 px-5 text-medium",
+        xl: "h-12 px-6 text-medium",
       },
     },
   },
@@ -23,11 +28,12 @@ const TVResponsiveButton = ({
   variant,
   radius,
   color,
+  iconOnly,
   classNames,
   ...props
 }: Omit<ButtonProps, keyof ButtonVariantProps> &
   VariantProps<typeof responsiveButton>) => {
-  const styles = responsiveButton({ color, size, variant, radius })
+  const styles = responsiveButton({ color, size, variant, radius, iconOnly })
 
   return (
     <Button

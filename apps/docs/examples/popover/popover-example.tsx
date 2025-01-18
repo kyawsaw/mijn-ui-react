@@ -1,13 +1,13 @@
-import { Button } from "@mijn-ui/react-button"
-import { Input } from "@mijn-ui/react-input"
-import { Label } from "@mijn-ui/react-label"
+import { Button } from "@mijn-ui/react"
+import { Input } from "@mijn-ui/react"
+import { Label } from "@mijn-ui/react"
 import {
   Popover,
   PopoverArrow,
   PopoverClose,
   PopoverContent,
   PopoverTrigger,
-} from "@mijn-ui/react-popover"
+} from "@mijn-ui/react"
 import { RxCross2, RxMixerHorizontal } from "react-icons/rx"
 
 // Making All of the Accordion Components Unstyled
@@ -18,12 +18,14 @@ type PopoverExampleProps = {
 const PopoverExample = ({ unstyled = false }: PopoverExampleProps) => {
   return (
     <Popover unstyled={unstyled}>
-      <PopoverTrigger className="rounded-full">
-        <RxMixerHorizontal size={18} />
+      <PopoverTrigger asChild>
+        <Button iconOnly radius="full">
+          <RxMixerHorizontal size={18} />
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="relative w-72 ">
         <div className="flex flex-col justify-center gap-2.5">
-          <p className="text-base font-medium">Dimensions</p>
+          <p className="text-medium font-medium">Dimensions</p>
 
           <fieldset className="flex w-full items-center justify-between gap-2">
             <Label
@@ -33,9 +35,10 @@ const PopoverExample = ({ unstyled = false }: PopoverExampleProps) => {
               Width
             </Label>
             <Input
-              className="max-w-40"
+              className="h-8 bg-card p-1.5"
               classNames={{
-                input: "h-8 py-1.5 px-1.5",
+                wrapper: "max-w-40",
+                label: "bg-card peer-focus:bg-card",
               }}
               id="width"
               defaultValue="100%"
@@ -49,9 +52,10 @@ const PopoverExample = ({ unstyled = false }: PopoverExampleProps) => {
               Max. width
             </Label>
             <Input
-              className="max-w-40"
+              className="h-8 bg-card p-1.5"
               classNames={{
-                input: "h-8 py-1.5 px-1.5",
+                wrapper: "max-w-40",
+                label: "bg-card peer-focus:bg-card",
               }}
               id="maxWidth"
               defaultValue="300px"
@@ -65,9 +69,10 @@ const PopoverExample = ({ unstyled = false }: PopoverExampleProps) => {
               Height
             </Label>
             <Input
-              className="max-w-40"
+              className="h-8 bg-card p-1.5"
               classNames={{
-                input: "h-8 py-1.5 px-1.5",
+                wrapper: "max-w-40",
+                label: "bg-card peer-focus:bg-card",
               }}
               id="height"
               defaultValue="25px"
@@ -81,9 +86,10 @@ const PopoverExample = ({ unstyled = false }: PopoverExampleProps) => {
               Max. height
             </Label>
             <Input
-              className="max-w-40"
+              className="h-8 bg-card p-1.5"
               classNames={{
-                input: "h-8 py-1.5 px-1.5",
+                wrapper: "max-w-40",
+                label: "bg-card peer-focus:bg-card",
               }}
               id="maxHeight"
               defaultValue="none"
@@ -92,16 +98,15 @@ const PopoverExample = ({ unstyled = false }: PopoverExampleProps) => {
         </div>
         <PopoverClose unstyled asChild>
           <Button
-            color={"accent"}
-            variant={"text"}
-            size={"icon"}
+            variant="ghost"
+            iconOnly
             radius={"full"}
             className="absolute right-0 top-0 hover:bg-transparent"
           >
             <RxCross2 />
           </Button>
         </PopoverClose>
-        <PopoverArrow className="fill-muted-text" />
+        <PopoverArrow className="fill-muted-foreground" />
       </PopoverContent>
     </Popover>
   )

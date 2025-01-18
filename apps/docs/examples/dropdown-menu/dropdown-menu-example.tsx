@@ -1,4 +1,5 @@
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -7,12 +8,14 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@mijn-ui/react-dropdown-menu"
+} from "@mijn-ui/react"
 
 const DropdownMenuExample = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>Edit</DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
+        <Button>Edit</Button>
+      </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>Undo</DropdownMenuItem>
         <DropdownMenuItem disabled>Redo</DropdownMenuItem>

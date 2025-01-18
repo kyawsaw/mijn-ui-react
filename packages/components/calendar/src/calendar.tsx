@@ -1,15 +1,15 @@
 "use client"
 
 import * as React from "react"
-import { createTVUnstyledSlots, UnstyledProps } from "@mijn-ui/react-core"
-import { DayFlag, DayPicker, SelectionState, UI } from "react-day-picker"
+import { createTVUnstyledSlots } from "@mijn-ui/react-core"
+import { UnstyledProps, calendarStyles } from "@mijn-ui/react-theme"
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
 } from "@mijn-ui/shared-icons"
-import { calendarStyles } from "@mijn-ui/react-theme"
+import { DayFlag, DayPicker, SelectionState, UI } from "react-day-picker"
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker> &
   UnstyledProps

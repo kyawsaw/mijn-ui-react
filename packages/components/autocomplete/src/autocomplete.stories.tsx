@@ -1,16 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react"
-import { Input } from "@mijn-ui/react-input"
-import {
-  Autocomplete,
-  AutocompleteContent,
-  AutocompleteGroup,
-  AutocompleteItem,
-  AutocompleteProps,
-  AutocompleteTrigger,
-} from "./autocomplete"
 import { useState } from "react"
-import { ChevronDownIcon, SearchIcon } from "@mijn-ui/shared-icons"
-import { ScrollArea } from "@mijn-ui/react-scroll-area"
 import { Button } from "@mijn-ui/react-button"
 import {
   Dialog,
@@ -19,6 +7,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@mijn-ui/react-dialog"
+import { Input } from "@mijn-ui/react-input"
+import { ScrollArea } from "@mijn-ui/react-scroll-area"
+import { ChevronDownIcon, SearchIcon } from "@mijn-ui/shared-icons"
+import { Meta, StoryObj } from "@storybook/react"
+import {
+  Autocomplete,
+  AutocompleteContent,
+  AutocompleteGroup,
+  AutocompleteItem,
+  AutocompleteProps,
+  AutocompleteTrigger,
+} from "./autocomplete"
 
 const meta: Meta<typeof Autocomplete> = {
   title: "Components/Autocomplete",
@@ -77,7 +77,7 @@ const AutocompleteTemplate = (args: AutocompleteProps) => {
     >
       <AutocompleteTrigger asChild>
         <Input
-          className="bg-surface"
+          className="bg-card"
           placeholder={"Search for a framework"}
           startIcon={<SearchIcon />}
           unstyled={args.unstyled}
@@ -106,16 +106,12 @@ const AutocompleteWithScrollArea = (args: AutocompleteProps) => {
       <AutocompleteTrigger asChild>
         <Input
           unstyled={args.unstyled}
-          className="bg-surface"
+          className="bg-card"
           placeholder={"Search for a framework"}
           startIcon={<SearchIcon />}
         />
       </AutocompleteTrigger>
-      <AutocompleteContent
-        className=""
-        emptyMessage="No Frameworks Found"
-        loading={false}
-      >
+      <AutocompleteContent emptyMessage="No Frameworks Found" loading={false}>
         <ScrollArea className="flex max-h-52 flex-col overflow-y-auto">
           <AutocompleteGroup>
             {FRAMEWORKS2.map((framework) => (
@@ -140,8 +136,8 @@ const AutocompleteWithDialog = (args: AutocompleteProps) => {
         <div className="flex flex-col space-y-2 text-center sm:text-left">
           <DialogTitle>User Information</DialogTitle>
         </div>
-        <Input placeholder="Username" />
-        <Input placeholder="Email" />
+        <Input placeholder="Username" className="bg-card" />
+        <Input placeholder="Email" className="bg-card" />
         <Autocomplete
           value={value}
           onValueChange={setValue}
@@ -150,13 +146,12 @@ const AutocompleteWithDialog = (args: AutocompleteProps) => {
           <AutocompleteTrigger asChild>
             <Input
               unstyled={args.unstyled}
-              className="bg-surface"
+              className="bg-card"
               placeholder={"Search for a framework"}
               endIcon={<ChevronDownIcon />}
             />
           </AutocompleteTrigger>
           <AutocompleteContent
-            className=""
             emptyMessage="No Frameworks Found"
             loading={false}
           >
@@ -174,7 +169,7 @@ const AutocompleteWithDialog = (args: AutocompleteProps) => {
         <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
           <DialogClose>Cancel</DialogClose>
           <DialogClose unstyled asChild>
-            <Button>Add User</Button>
+            <Button color="primary">Add User</Button>
           </DialogClose>
         </div>
       </DialogContent>
@@ -193,10 +188,9 @@ const AutocompleteUnstyled = (args: AutocompleteProps) => {
     >
       <AutocompleteTrigger asChild>
         <Input
-          className="bg-surface flex items-center gap-2 p-2"
+          className="bg-muted border-0 focus-visible:outline-none focus-visible:ring-0"
           classNames={{
-            input:
-              "bg-surface border-0 focus-visible:outline-none focus-visible:ring-0",
+            wrapper: "bg-muted flex items-center gap-2 p-2",
           }}
           placeholder={"Search for a framework"}
           startIcon={<SearchIcon />}

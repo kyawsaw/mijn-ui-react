@@ -1,16 +1,17 @@
 "use client"
 
 import * as React from "react"
-import * as TabsPrimitive from "@radix-ui/react-tabs"
-
+import { createTVUnstyledSlots } from "@mijn-ui/react-core"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
 import {
+  TabsSlots,
   UnstyledComponentWithSlots,
   UnstyledProps,
-  createTVUnstyledSlots,
-} from "@mijn-ui/react-core"
-import { cn, createContext } from "@mijn-ui/react-utilities"
-import { tabsStyles, TabsSlots } from "@mijn-ui/react-theme"
-import { useTVUnstyled } from "@mijn-ui/react-hooks"
+  cn,
+  tabsStyles,
+} from "@mijn-ui/react-theme"
+import { createContext } from "@mijn-ui/react-utilities"
+import * as TabsPrimitive from "@radix-ui/react-tabs"
 
 /* -------------------------------------------------------------------------- */
 /*                                 TabsContext                                */
@@ -69,8 +70,9 @@ const Tabs = ({
 /* -------------------------------------------------------------------------- */
 /*                                  TabsList                                  */
 /* -------------------------------------------------------------------------- */
-
-type TabsListProps = React.ComponentPropsWithRef<typeof TabsPrimitive.List> &
+export type TabsListProps = React.ComponentPropsWithRef<
+  typeof TabsPrimitive.List
+> &
   UnstyledProps
 
 const TabsList = ({ className, unstyled, ...props }: TabsListProps) => {
@@ -90,7 +92,7 @@ const TabsList = ({ className, unstyled, ...props }: TabsListProps) => {
 /*                                 TabsTrigger                                */
 /* -------------------------------------------------------------------------- */
 
-type TabsTriggerProps = React.ComponentPropsWithRef<
+export type TabsTriggerProps = React.ComponentPropsWithRef<
   typeof TabsPrimitive.Trigger
 > &
   UnstyledProps
@@ -112,7 +114,7 @@ const TabsTrigger = ({ className, unstyled, ...props }: TabsTriggerProps) => {
 /*                                 TabsContent                                */
 /* -------------------------------------------------------------------------- */
 
-type TabsContentProps = React.ComponentPropsWithRef<
+export type TabsContentProps = React.ComponentPropsWithRef<
   typeof TabsPrimitive.Content
 > &
   UnstyledProps
@@ -130,4 +132,11 @@ const TabsContent = ({ className, unstyled, ...props }: TabsContentProps) => {
   )
 }
 
-export { Tabs, TabsList, TabsTrigger, TabsContent }
+export {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  useTabsContext,
+  useTabsStyles,
+}

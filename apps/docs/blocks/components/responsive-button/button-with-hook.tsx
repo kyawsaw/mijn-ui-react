@@ -1,8 +1,9 @@
 "use client"
 
-import { Button } from "@mijn-ui/react-button"
-import { useResponsiveVariants } from "./use-responsive-variants" // update import path
-import { ButtonVariantProps } from "@mijn-ui/react-theme"
+import { Button } from "@mijn-ui/react"
+// update import path
+import { ButtonVariantProps } from "@mijn-ui/react"
+import { useResponsiveVariants } from "./use-responsive-variants"
 
 const ButtonWithHook = () => {
   const buttonVariants = useResponsiveVariants<ButtonVariantProps>({
@@ -13,7 +14,7 @@ const ButtonWithHook = () => {
       lg: "danger",
     },
     size: {
-      initial: "icon",
+      initial: "xs",
       sm: "sm",
       md: "lg",
       lg: "lg",
@@ -24,7 +25,7 @@ const ButtonWithHook = () => {
 
   return (
     <Button color={color} size={size}>
-      {size === "icon" ? "B" : "Button"}
+      Button
     </Button>
   )
 }

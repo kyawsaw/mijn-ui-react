@@ -1,6 +1,6 @@
 import * as React from "react"
-import { createTVUnstyledSlots, UnstyledProps } from "@mijn-ui/react-core"
-import { textareaStyles } from "@mijn-ui/react-theme"
+import { createTVUnstyledSlots } from "@mijn-ui/react-core"
+import { UnstyledProps, textareaStyles } from "@mijn-ui/react-theme"
 
 export type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> &
   UnstyledProps

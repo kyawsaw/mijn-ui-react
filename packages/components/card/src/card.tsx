@@ -1,14 +1,16 @@
 "use client"
 
 import * as React from "react"
-import { createContext, cn } from "@mijn-ui/react-utilities"
+import { createTVUnstyledSlots } from "@mijn-ui/react-core"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
 import {
-  createTVUnstyledSlots,
+  CardSlots,
   UnstyledComponentWithSlots,
   UnstyledProps,
-} from "@mijn-ui/react-core"
-import { cardStyles, CardSlots } from "@mijn-ui/react-theme"
-import { useTVUnstyled } from "@mijn-ui/react-hooks"
+  cardStyles,
+  cn,
+} from "@mijn-ui/react-theme"
+import { createContext } from "@mijn-ui/react-utilities"
 
 /* -------------------------------------------------------------------------- */
 /*                              CardContext                                   */
@@ -68,7 +70,7 @@ const Card = ({
 /*                                 CardHeader                                 */
 /* -------------------------------------------------------------------------- */
 
-type CardHeaderProps = React.ComponentPropsWithRef<"div"> & UnstyledProps
+export type CardHeaderProps = React.ComponentPropsWithRef<"div"> & UnstyledProps
 
 const CardHeader = ({ className, unstyled, ...props }: CardHeaderProps) => {
   const { header, classNames } = useCardStyles(unstyled)
@@ -87,7 +89,7 @@ const CardHeader = ({ className, unstyled, ...props }: CardHeaderProps) => {
 /*                                  CardTitle                                 */
 /* -------------------------------------------------------------------------- */
 
-type CardTitleProps = React.ComponentPropsWithRef<"div"> & UnstyledProps
+export type CardTitleProps = React.ComponentPropsWithRef<"div"> & UnstyledProps
 
 const CardTitle = ({ className, unstyled, ...props }: CardTitleProps) => {
   const { title, classNames } = useCardStyles(unstyled)
@@ -106,7 +108,8 @@ const CardTitle = ({ className, unstyled, ...props }: CardTitleProps) => {
 /*                               CardDescription                              */
 /* -------------------------------------------------------------------------- */
 
-type CardDescriptionProps = React.ComponentPropsWithRef<"div"> & UnstyledProps
+export type CardDescriptionProps = React.ComponentPropsWithRef<"div"> &
+  UnstyledProps
 
 const CardDescription = ({
   className,
@@ -129,7 +132,8 @@ const CardDescription = ({
 /*                                 CardContent                                */
 /* -------------------------------------------------------------------------- */
 
-type CardContentProps = React.ComponentPropsWithRef<"div"> & UnstyledProps
+export type CardContentProps = React.ComponentPropsWithRef<"div"> &
+  UnstyledProps
 
 const CardContent = ({ className, unstyled, ...props }: CardContentProps) => {
   const { content, classNames } = useCardStyles(unstyled)
@@ -148,7 +152,7 @@ const CardContent = ({ className, unstyled, ...props }: CardContentProps) => {
 /*                                 CardFooter                                 */
 /* -------------------------------------------------------------------------- */
 
-type CardFooterProps = React.ComponentPropsWithRef<"div"> & UnstyledProps
+export type CardFooterProps = React.ComponentPropsWithRef<"div"> & UnstyledProps
 
 const CardFooter = ({ className, unstyled, ...props }: CardFooterProps) => {
   const { footer, classNames } = useCardStyles(unstyled)
@@ -163,4 +167,12 @@ const CardFooter = ({ className, unstyled, ...props }: CardFooterProps) => {
   )
 }
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  useCardStyles,
+}

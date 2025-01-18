@@ -1,18 +1,18 @@
 "use client"
 
 import * as React from "react"
-import { Dialog, DialogContent } from "@mijn-ui/react-dialog"
-import { cn, createContext } from "@mijn-ui/react-utilities"
+import { createTVUnstyledSlots } from "@mijn-ui/react-core"
+import { Dialog, DialogContent, type DialogProps } from "@mijn-ui/react-dialog"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
 import {
-  createTVUnstyledSlots,
+  CommandSlots,
   UnstyledComponentWithSlots,
   UnstyledProps,
-} from "@mijn-ui/react-core"
-import { type DialogProps } from "@radix-ui/react-dialog"
+  cn,
+  commandStyles,
+} from "@mijn-ui/react-theme"
+import { createContext } from "@mijn-ui/react-utilities"
 import { Command as CommandPrimitive } from "cmdk"
-import { SearchIcon } from "@mijn-ui/shared-icons"
-import { commandStyles, CommandSlots } from "@mijn-ui/react-theme"
-import { useTVUnstyled } from "@mijn-ui/react-hooks"
 
 /* -------------------------------------------------------------------------- */
 /*                               CommandContext                               */
@@ -57,15 +57,12 @@ const Command = ({
   ...props
 }: CommandProps) => {
   const styles = commandStyles()
-  const { command } = createTVUnstyledSlots(
-    { command: styles.command },
-    unstyled,
-  )
+  const { base } = createTVUnstyledSlots({ base: styles.base }, unstyled)
 
   return (
     <CommandProvider value={{ unstyled, styles, classNames }}>
       <CommandPrimitive
-        className={command({ className: cn(classNames?.command, className) })}
+        className={base({ className: cn(classNames?.base, className) })}
         {...props}
       />
     </CommandProvider>
@@ -76,7 +73,7 @@ const Command = ({
 /*                                CommandDialog                               */
 /* -------------------------------------------------------------------------- */
 
-type CommandDialogProps = DialogProps &
+export type CommandDialogProps = Omit<DialogProps, "classNames"> &
   CommandBaseProps & { className?: string }
 
 const CommandDialog = ({
@@ -88,10 +85,10 @@ const CommandDialog = ({
 }: CommandDialogProps) => {
   const styles = commandStyles()
 
-  const { dialogContent, dialogCommand } = createTVUnstyledSlots(
+  const { dialogWrapper, dialog } = createTVUnstyledSlots(
     {
-      dialogContent: styles.dialogContent,
-      dialogCommand: styles.dialogCommand,
+      dialogWrapper: styles.dialogWrapper,
+      dialog: styles.dialog,
     },
     unstyled,
   )
@@ -100,13 +97,13 @@ const CommandDialog = ({
     <CommandProvider value={{ unstyled, styles, classNames }}>
       <Dialog {...props}>
         <DialogContent
-          className={dialogContent({
-            className: cn(classNames?.dialogContent),
+          className={dialogWrapper({
+            className: cn(classNames?.dialogWrapper),
           })}
         >
           <Command
-            className={dialogCommand({
-              className: cn(classNames?.dialogCommand, className),
+            className={dialog({
+              className: cn(classNames?.dialog, className),
             })}
           >
             {children}
@@ -121,35 +118,21 @@ const CommandDialog = ({
 /*                                CommandInput                                */
 /* -------------------------------------------------------------------------- */
 
-type CommandInputProps = React.ComponentPropsWithRef<
+export type CommandInputProps = React.ComponentPropsWithRef<
   typeof CommandPrimitive.Input
 > &
   UnstyledProps
 
 const CommandInput = ({ className, unstyled, ...props }: CommandInputProps) => {
-  const { input, inputIcon, inputWrapper, classNames } =
-    useCommandStyles(unstyled)
+  const { input, classNames } = useCommandStyles(unstyled)
 
   return (
-    <div
-      className={inputWrapper({
-        className: classNames?.inputWrapper,
+    <CommandPrimitive.Input
+      className={input({
+        className: cn(classNames?.input, className),
       })}
-      /* eslint-disable-next-line */
-      cmdk-input-wrapper=""
-    >
-      <SearchIcon
-        className={inputIcon({
-          className: classNames?.inputIcon,
-        })}
-      />
-      <CommandPrimitive.Input
-        className={input({
-          className: cn(classNames?.input, className),
-        })}
-        {...props}
-      />
-    </div>
+      {...props}
+    />
   )
 }
 
@@ -157,7 +140,7 @@ const CommandInput = ({ className, unstyled, ...props }: CommandInputProps) => {
 /*                                 CommandList                                */
 /* -------------------------------------------------------------------------- */
 
-type CommandListProps = React.ComponentPropsWithRef<
+export type CommandListProps = React.ComponentPropsWithRef<
   typeof CommandPrimitive.List
 > &
   UnstyledProps
@@ -179,7 +162,7 @@ const CommandList = ({ className, unstyled, ...props }: CommandListProps) => {
 /*                                CommandEmpty                                */
 /* -------------------------------------------------------------------------- */
 
-type CommandEmptyProps = React.ComponentPropsWithRef<
+export type CommandEmptyProps = React.ComponentPropsWithRef<
   typeof CommandPrimitive.Empty
 > &
   UnstyledProps
@@ -201,7 +184,7 @@ const CommandEmpty = ({ unstyled, className, ...props }: CommandEmptyProps) => {
 /*                                CommandGroup                                */
 /* -------------------------------------------------------------------------- */
 
-type CommandGroupProps = React.ComponentPropsWithRef<
+export type CommandGroupProps = React.ComponentPropsWithRef<
   typeof CommandPrimitive.Group
 > &
   UnstyledProps
@@ -223,7 +206,7 @@ const CommandGroup = ({ className, unstyled, ...props }: CommandGroupProps) => {
 /*                              CommandSeparator                              */
 /* -------------------------------------------------------------------------- */
 
-type CommandSeparatorProps = React.ComponentPropsWithRef<
+export type CommandSeparatorProps = React.ComponentPropsWithRef<
   typeof CommandPrimitive.Separator
 > &
   UnstyledProps
@@ -248,7 +231,7 @@ const CommandSeparator = ({
 /*                                 CommandItem                                */
 /* -------------------------------------------------------------------------- */
 
-type CommandItemProps = React.ComponentPropsWithRef<
+export type CommandItemProps = React.ComponentPropsWithRef<
   typeof CommandPrimitive.Item
 > &
   UnstyledProps
@@ -269,7 +252,7 @@ const CommandItem = ({ className, unstyled, ...props }: CommandItemProps) => {
 /*                               CommandShortcut                              */
 /* -------------------------------------------------------------------------- */
 
-type CommandShortcutProps = React.HTMLAttributes<HTMLSpanElement> &
+export type CommandShortcutProps = React.HTMLAttributes<HTMLSpanElement> &
   UnstyledProps
 
 const CommandShortcut = ({
@@ -299,4 +282,5 @@ export {
   CommandList,
   CommandSeparator,
   CommandShortcut,
+  useCommandStyles,
 }

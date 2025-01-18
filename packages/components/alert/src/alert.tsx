@@ -1,19 +1,17 @@
 "use client"
 
 import * as React from "react"
-import { createContext } from "@mijn-ui/react-utilities"
-import {
-  createTVUnstyledSlots,
-  UnstyledComponentWithSlots,
-  UnstyledProps,
-} from "@mijn-ui/react-core"
+import { createTVUnstyledSlots } from "@mijn-ui/react-core"
+import { useTVUnstyled } from "@mijn-ui/react-hooks"
 import {
   AlertSlots,
-  alertStyles,
   AlertVariantProps,
+  UnstyledComponentWithSlots,
+  UnstyledProps,
+  alertStyles,
+  cn,
 } from "@mijn-ui/react-theme"
-import { useTVUnstyled } from "@mijn-ui/react-hooks"
-import { cn } from "@mijn-ui/react-utilities"
+import { createContext } from "@mijn-ui/react-utilities"
 
 /* -------------------------------------------------------------------------- */
 /*                              AlertContext                                  */
@@ -75,7 +73,7 @@ const Alert = ({
 /*                                  AlertIcon                                 */
 /* -------------------------------------------------------------------------- */
 
-type AlertIconProps = React.ComponentProps<"span"> & UnstyledProps
+export type AlertIconProps = React.ComponentProps<"span"> & UnstyledProps
 
 const AlertIcon = ({ unstyled, className, ...props }: AlertIconProps) => {
   const { iconWrapper, classNames } = useAlertStyles(unstyled)
@@ -94,9 +92,9 @@ const AlertIcon = ({ unstyled, className, ...props }: AlertIconProps) => {
 /*                                 AlertTitle                                 */
 /* -------------------------------------------------------------------------- */
 
-type AlertTitle = React.ComponentProps<"h5"> & UnstyledProps
+export type AlertTitleProps = React.ComponentProps<"h5"> & UnstyledProps
 
-const AlertTitle = ({ unstyled, className, ...props }: AlertTitle) => {
+const AlertTitle = ({ unstyled, className, ...props }: AlertTitleProps) => {
   const { title, classNames } = useAlertStyles(unstyled)
 
   return (
@@ -111,7 +109,7 @@ const AlertTitle = ({ unstyled, className, ...props }: AlertTitle) => {
 /*                              AlertDescription                              */
 /* -------------------------------------------------------------------------- */
 
-type AlertDescriptionProps = React.ComponentProps<"p"> & UnstyledProps
+export type AlertDescriptionProps = React.ComponentProps<"p"> & UnstyledProps
 
 const AlertDescription = ({
   unstyled,
@@ -130,4 +128,4 @@ const AlertDescription = ({
   )
 }
 
-export { Alert, AlertDescription, AlertIcon, AlertTitle }
+export { Alert, AlertDescription, AlertIcon, AlertTitle, useAlertStyles }
